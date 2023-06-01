@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['About Us', 'Vision', 'Mission','Courses','Forum','Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Logout'];
 
 function HomeAppBar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
