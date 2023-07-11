@@ -9,20 +9,40 @@ import CoursesAccordion from "../accordions/CoursesAccordion";
 
 export default function CoursesCard() {
   return (
-    <Card sx={{ maxWidth: "100%" }}>
-      <CardMedia
-        sx={{ height: { xs: 250, sm: 300, md: 400, lg: 500 } }}
-        image="/assets/software-roles.jpg"
-      />
+    <Card
+      sx={{
+        maxWidth: "100%",
+        zIndex: 100,
+        mt: 5,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        color: "orange",
+        bgcolor: "black",
+        opacity: 0.9,
+      }}
+    >
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-          What you need to learn to become an expert in Software Engineering
+          Our courses that will make you stand out in 24 months
         </Typography>
         <CoursesAccordion />
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button
+          size="small"
+          sx={{
+            color: "black",
+            bgcolor: "orange",
+            fontWeight: "bold",
+            height: 50,
+            m: 5,
+          }}
+          variant="contained"
+        >
+          Sign up for one month Free Class
+        </Button>
       </CardActions>
     </Card>
   );

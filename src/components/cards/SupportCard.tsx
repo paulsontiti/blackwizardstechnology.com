@@ -18,13 +18,14 @@ export default function SupportCard() {
           Support from day one
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          We are ready to hold your hands and walk with you every step of the
+          way. No student will be left behind, no program or effort will be in
+          vain as we make it a point of duty to ensure that you get optimum
+          value for your money and time.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Sign Up for free class</Button>
       </CardActions>
     </Card>
   );

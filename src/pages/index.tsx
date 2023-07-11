@@ -2,6 +2,7 @@
 // import { Inter } from 'next/font/google'
 // import styles from './page.module.css'
 import RootLayout from "@/app/layout";
+import CourseHighlight from "@/components/bottomNavigation/CourseHighlight";
 import BWTIntoCard from "@/components/cards/BWTIntoCard";
 import CareerCard from "@/components/cards/CareerCard";
 import CoursesCard from "@/components/cards/CoursesCard";
@@ -9,7 +10,7 @@ import FlexibleClassesCard from "@/components/cards/FlexibleClassesCard";
 import NoBGCard from "@/components/cards/NoBGCard";
 import SchoolarshipCard from "@/components/cards/SchoolarshipCard";
 import SupportCard from "@/components/cards/SupportCard";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 //const inter = Inter({ subsets: ['latin'] })
@@ -19,14 +20,32 @@ export default function Home() {
     <>
       <main>
         <RootLayout>
+          <Image
+            src={"/assets/software-engineering.jpeg"}
+            fill
+            alt="Black Wizards Technology"
+          />
           <BWTIntoCard />
-          <OurName />
-          <CareerCard />
-          <NoBGCard />
           <CoursesCard />
-          <SchoolarshipCard />
-          <FlexibleClassesCard />
-          <SupportCard />
+
+          <Box
+            mt={{ xs: 10, md: 30, lg: 5 }}
+            mb={{ xs: 50, sm: 30, md: 20 }}
+            // bgcolor={"black"}
+            // display={"flex"}
+            // alignItems={"center"}
+            // justifyContent={"ccenter"}
+            // flexDirection={"column"}
+            // minWidth={"100%"}
+            // sx={{ opacity: 0.8 }}
+          >
+            <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
+              Course Highlights
+            </Typography>
+            <CourseHighlight />
+          </Box>
+          {/* <CareerCard />
+          <NoBGCard /> */}
         </RootLayout>
       </main>
     </>

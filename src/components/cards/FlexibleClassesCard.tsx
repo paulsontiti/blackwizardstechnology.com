@@ -15,41 +15,18 @@ export default function FlexibleClassesCard() {
         image="/assets/flexible.jpg"
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          Designed to suit you
+        <Typography>
+          We at Black Wizards Technology are customer centric and that is why we
+          have tailored all our programs to suit you. We shall pay attention to
+          your needs, specifications, expectations and preferences. We have
+          various packages for various individuals, we also have various
+          commitment levels all of which will be presented to our students to
+          make their preferred choice. We are so flexible and accommodating that
+          whatever is not available in a portfolio would be provided as long as
+          it is a requirement or need. We are open to working with your time,
+          your needs and are willing to help find a way around your budget in
+          situations where it doesn’t meet up with our requirement
         </Typography>
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          flexDirection={"column"}
-        >
-          <Image src={"/assets/calender.png"} alt="" width={100} height={100} />
-          <Typography>Our Courses are designed to suit your time</Typography>
-        </Box>
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          flexDirection={"column"}
-        >
-          <Image
-            src={"/assets/pay-as-you-go.png"}
-            alt=""
-            width={100}
-            height={100}
-          />
-          <Typography>Our Courses are designed to suit your tim</Typography>
-        </Box>
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          flexDirection={"column"}
-        >
-          <Image src={"/assets/tution.png"} alt="" width={100} height={100} />
-          <Typography>Our Courses are designed to suit your tim</Typography>
-        </Box>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>

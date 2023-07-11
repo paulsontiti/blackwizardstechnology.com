@@ -7,28 +7,24 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const pages = [
-  "Home",
-  "About Us",
-  "Vision",
-  "Mission",
-  "Courses",
-  "Forum",
-  "Blog",
+  { name: "Home", url: "/" },
+  { name: "About Us", url: "/about-us" },
+  { name: "Vision", url: "/vision" },
+  { name: "Mission", url: "/mission" },
+  { name: "Courses", url: "/courses" },
 ];
 const settings = ["Profile", "Account", "Logout"];
 
 function HomeAppBar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
+  const router = useRouter();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,7 +41,7 @@ function HomeAppBar() {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ zIndex: 100, position: "fixed", top: 5 }}>
       <Toolbar disableGutters>
         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
           <IconButton
@@ -77,8 +73,14 @@ function HomeAppBar() {
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem
+                key={page.name}
+                onClick={() => {
+                  handleCloseNavMenu();
+                  router.push(page.url);
+                }}
+              >
+                <Typography textAlign="center">{page.name}</Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -94,11 +96,20 @@ function HomeAppBar() {
         >
           {pages.map((page) => (
             <Button
-              key={page}
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "black", display: "block" }}
+              key={page.name}
+              onClick={() => {
+                handleCloseNavMenu();
+                router.push(page.url);
+              }}
+              sx={{
+                my: 2,
+                color: "orange",
+                display: "block",
+                bgcolor: "black",
+                textTransform: "capitalize",
+              }}
             >
-              {page}
+              {page.name}
             </Button>
           ))}
         </Box>
