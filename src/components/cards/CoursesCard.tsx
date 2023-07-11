@@ -2,12 +2,13 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CoursesAccordion from "../accordions/CoursesAccordion";
+import { useRouter } from "next/router";
 
 export default function CoursesCard() {
+  const router = useRouter();
   return (
     <Card
       sx={{
@@ -40,6 +41,9 @@ export default function CoursesCard() {
             m: 5,
           }}
           variant="contained"
+          onClick={() => {
+            router.push("/free-class");
+          }}
         >
           Sign up for one month Free Class
         </Button>

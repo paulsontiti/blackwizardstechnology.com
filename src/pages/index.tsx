@@ -3,6 +3,7 @@
 // import styles from './page.module.css'
 import RootLayout from "@/app/layout";
 import CourseHighlight from "@/components/bottomNavigation/CourseHighlight";
+import DesignedToSuit from "@/components/bottomNavigation/DesignedToSuit";
 import BWTIntoCard from "@/components/cards/BWTIntoCard";
 import CareerCard from "@/components/cards/CareerCard";
 import CoursesCard from "@/components/cards/CoursesCard";
@@ -30,7 +31,7 @@ export default function Home() {
 
           <Box
             mt={{ xs: 10, md: 30, lg: 5 }}
-            mb={{ xs: 50, sm: 30, md: 20 }}
+            mb={{ xs: 25, md: 10 }}
             // bgcolor={"black"}
             // display={"flex"}
             // alignItems={"center"}
@@ -39,13 +40,18 @@ export default function Home() {
             // minWidth={"100%"}
             // sx={{ opacity: 0.8 }}
           >
+            <Typography variant="h6" textAlign={"center"}>
+              Designed To Suit You
+            </Typography>
+            <DesignedToSuit />
+          </Box>
+          <CareerCard />
+          <Box mt={{ xs: 10, md: 30, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
             <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
               Course Highlights
             </Typography>
             <CourseHighlight />
           </Box>
-          {/* <CareerCard />
-          <NoBGCard /> */}
         </RootLayout>
       </main>
     </>

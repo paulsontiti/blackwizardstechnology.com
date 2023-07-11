@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -85,7 +84,15 @@ function HomeAppBar() {
             ))}
           </Menu>
         </Box>
-        <Image src={"/assets/logo.jpg"} alt="" width={200} height={70} />
+        <Image
+          src={"/assets/logo.jpg"}
+          alt=""
+          width={200}
+          height={70}
+          onClick={() => {
+            router.push("/");
+          }}
+        />
         <Box
           sx={{
             flexGrow: 1,

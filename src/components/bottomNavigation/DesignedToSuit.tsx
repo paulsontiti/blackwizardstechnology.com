@@ -4,7 +4,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Image from "next/image";
 
-export default function CourseHighlight() {
+export default function DesignedToSuit() {
   const [value, setValue] = React.useState(0);
 
   return (
@@ -19,8 +19,7 @@ export default function CourseHighlight() {
       >
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="24-Month
-          Online Program"
+          label="Customer Service"
           icon={
             <Box mb={2}>
               {" "}
@@ -35,7 +34,7 @@ export default function CourseHighlight() {
         />
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="Recorded Lectures & Weekly Personalised Live Mentorship Sessions "
+          label="Flexible Programs"
           icon={
             <Box mb={2}>
               {" "}
@@ -50,8 +49,7 @@ export default function CourseHighlight() {
         />
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="8-10 Hours
-Commitment per Week"
+          label="Budget"
           icon={
             <Box mb={2}>
               {" "}
@@ -61,28 +59,12 @@ Commitment per Week"
         />{" "}
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="Career guidance &
-Hands-on Projects"
+          label="Support From Day One"
           icon={
             <Box mb={2}>
               {" "}
               <Image
                 src={"/assets/hands-on-project.svg"}
-                alt=""
-                width={50}
-                height={50}
-              />
-            </Box>
-          }
-        />
-        <BottomNavigationAction
-          sx={{ minWidth: 150, mb: 5 }}
-          label="Additional Bootcamp to learn the foundations of programming"
-          icon={
-            <Box mb={2}>
-              {" "}
-              <Image
-                src={"/assets/strong-foundation.png"}
                 alt=""
                 width={50}
                 height={50}

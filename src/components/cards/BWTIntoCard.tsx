@@ -3,8 +3,10 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 
 export default function BWTIntoCard() {
+  const router = useRouter();
   return (
     <Box
       sx={{ maxWidth: 350 }}
@@ -32,13 +34,23 @@ export default function BWTIntoCard() {
       </Typography>
       <CardActions>
         <Button
+          onClick={() => {
+            router.push("/free-class");
+          }}
           size="small"
           variant="contained"
           sx={{ bgcolor: "orange", color: "black", fontWeight: "bold" }}
         >
           Sign Up For A Free Class
         </Button>
-        <Button size="small" variant="outlined" sx={{ color: "orange" }}>
+        <Button
+          size="small"
+          variant="outlined"
+          sx={{ color: "orange" }}
+          onClick={() => {
+            router.push("/no-background");
+          }}
+        >
           Learn More
         </Button>
       </CardActions>
