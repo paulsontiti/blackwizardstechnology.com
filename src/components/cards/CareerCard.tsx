@@ -10,45 +10,35 @@ export default function CareerCard() {
   const router = useRouter();
   return (
     <Box
-      sx={{ maxWidth: "100%" }}
-      display={"flex"}
-      flexDirection={{ xs: "column", sm: "row" }}
+      sx={{
+        maxWidth: "100%",
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "white",
+        bgcolor: "black",
+        flexDirection: { xs: "column", sm: "row" },
+        opacity: 0.9,
+      }}
     >
-      <Box display={{ xs: "none", md: "flex", lg: "none" }}>
-        <Image
-          src={"/assets/career.png"}
-          width={500}
-          height={400}
-          alt="  Why a career in Software Engineering?"
-        />
-      </Box>
-      <Box display={{ xs: "none", lg: "flex" }}>
-        <Image
-          src={"/assets/career.png"}
-          width={800}
-          height={500}
-          alt="  Why a career in Software Engineering?"
-        />
-      </Box>
-
       <Box
-        display={{ xs: "flex", md: "none" }}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <Image
-          src={"/assets/career.png"}
-          width={350}
-          height={300}
-          alt="  Why a career in Software Engineering?"
-        />
-      </Box>
+        component="img"
+        sx={{
+          height: 400,
+          display: "block",
+          overflow: "hidden",
+          width: { xs: "100%", sm: "50%" },
+        }}
+        src={"/assets/career.png"}
+        alt="Why a career in Software Engineering"
+      />
 
-      <Box m={2}>
-        <Typography gutterBottom variant="h6" component="div">
+      <Box m={2} width={{ xs: "98%", sm: "50%" }}>
+        <Typography gutterBottom variant="h6" color="orange" p={2}>
           Why a career in Software Engineering?
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="white" pl={2}>
           The tech industry is rapidly growing, and the demand for skilled tech
           professionals is on the rise. According to Global Reports, the global
           e-learning market size valued at $399.3 billion in 2022 is expected to
@@ -61,6 +51,7 @@ export default function CareerCard() {
         <CardActions>
           <Button
             size="small"
+            sx={{ color: "orange" }}
             onClick={() => {
               router.push("/why-software-engineering");
             }}

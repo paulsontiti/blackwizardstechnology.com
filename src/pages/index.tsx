@@ -4,13 +4,9 @@
 import RootLayout from "@/app/layout";
 import CourseHighlight from "@/components/bottomNavigation/CourseHighlight";
 import DesignedToSuit from "@/components/bottomNavigation/DesignedToSuit";
-import BWTIntoCard from "@/components/cards/BWTIntoCard";
 import CareerCard from "@/components/cards/CareerCard";
 import CoursesCard from "@/components/cards/CoursesCard";
-import FlexibleClassesCard from "@/components/cards/FlexibleClassesCard";
-import NoBGCard from "@/components/cards/NoBGCard";
-import SchoolarshipCard from "@/components/cards/SchoolarshipCard";
-import SupportCard from "@/components/cards/SupportCard";
+import IntroStepper from "@/components/stepper/IntroStepper";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -21,16 +17,16 @@ export default function Home() {
     <>
       <main>
         <RootLayout>
-          <Image
+          {/* <Image
             src={"/assets/software-engineering.jpeg"}
             fill
             alt="Black Wizards Technology"
-          />
-          <BWTIntoCard />
-          <CoursesCard />
+          /> */}
+          <IntroStepper />
+          <CareerCard />
 
           <Box
-            mt={{ xs: 10, md: 30, lg: 5 }}
+            mt={5}
             mb={{ xs: 25, md: 10 }}
             // bgcolor={"black"}
             // display={"flex"}
@@ -45,8 +41,9 @@ export default function Home() {
             </Typography>
             <DesignedToSuit />
           </Box>
-          <CareerCard />
-          <Box mt={{ xs: 10, md: 30, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
+          <CoursesCard />
+
+          <Box mt={{ xs: 10, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
             <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
               Course Highlights
             </Typography>

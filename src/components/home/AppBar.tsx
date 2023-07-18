@@ -1,29 +1,52 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
+import ChildCareIcon from "@mui/icons-material/ChildCare";
+import ChildFriendlyIcon from "@mui/icons-material/ChildFriendly";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
+import WorkIcon from "@mui/icons-material/Work";
 import { useRouter } from "next/router";
+import {
+  Button,
+  Collapse,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import SchoolIcon from "@mui/icons-material/School";
+import WebIcon from "@mui/icons-material/Web";
+import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
+import StorageIcon from "@mui/icons-material/Storage";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const pages = [
   { name: "Home", url: "/" },
   { name: "About Us", url: "/about-us" },
-  { name: "Vision", url: "/vision" },
-  { name: "Mission", url: "/mission" },
   { name: "Courses", url: "/courses" },
 ];
 const settings = ["Profile", "Account", "Logout"];
 
 function HomeAppBar() {
+  const [openCourses, setOpenCourses] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
+  const router = useRouter();
+  const coursesHandleClick = () => {
+    setOpenCourses(!openCourses);
+  };
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const router = useRouter();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -41,48 +64,270 @@ function HomeAppBar() {
 
   return (
     <Container maxWidth="xl" sx={{ zIndex: 100, position: "fixed", top: 5 }}>
-      <Toolbar disableGutters>
+      <Toolbar disableGutters sx={{ m: 3 }}>
         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="inherit"
+            onClick={() => {
+              setOpenDrawer(true);
+            }}
+            sx={{ color: "orange" }}
           >
             <MenuIcon />
           </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
+
+          <Drawer
+            anchor="left"
+            open={openDrawer}
+            onClose={() => {
+              setOpenDrawer(false);
             }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: "block", md: "none" },
+              maxWidth: "50vw",
+              padding: ".5rem",
+              bgcolor: "black",
             }}
           >
-            {pages.map((page) => (
-              <MenuItem
-                key={page.name}
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 300,
+                pl: 0,
+                overflowY: "auto",
+                color: "white",
+                bgcolor: "black",
+                height: "100vh",
+              }}
+              component="nav"
+              aria-labelledby="nested-list-subheader"
+            >
+              <ListItemButton
+                sx={{ ml: 0 }}
                 onClick={() => {
-                  handleCloseNavMenu();
-                  router.push(page.url);
+                  router.push("/");
                 }}
               >
-                <Typography textAlign="center">{page.name}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
+                <ListItemIcon>
+                  <HomeIcon sx={{ color: "orange" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body1">Home</Typography>}
+                />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ ml: 0 }}
+                onClick={() => {
+                  router.push("/about-us");
+                }}
+              >
+                <ListItemIcon>
+                  <InfoIcon sx={{ color: "orange" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body1">About Us</Typography>}
+                />
+              </ListItemButton>
+
+              <ListItemButton
+                sx={{ ml: 0 }}
+                onClick={() => {
+                  router.push("/courses");
+                }}
+              >
+                <ListItemIcon>
+                  <SchoolIcon sx={{ color: "orange" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body1">Courses</Typography>}
+                />
+                {/* {openCourses ? <ExpandLess /> : <ExpandMore />} */}
+              </ListItemButton>
+              {/* <Collapse in={openCourses} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      <ChildCareIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Software Engineering For JSS
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      <ChildFriendlyIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Software Engineering For SSS
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      {" "}
+                      <EngineeringIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Software Engineering
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      {" "}
+                      <IntegrationInstructionsIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Computer Programming In Javascript,Python & Golang
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      {" "}
+                      <WebIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">Web Development</Typography>
+                      }
+                    />
+                  </ListItemButton>
+
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      <DeveloperModeIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Mobile Development
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      {" "}
+                      <StorageIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Database Management Systems
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    sx={{ ml: 4 }}
+                    onClick={() => {
+                      router.push("/dashboard/job/current");
+                    }}
+                  >
+                    {" "}
+                    <ListItemIcon>
+                      <VisibilityIcon sx={{ color: "orange" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography variant="body2">
+                          Visualization(UI,Ux and Graphics)
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                </List>
+              </Collapse> */}
+              <ListItemButton
+                sx={{ ml: 0 }}
+                onClick={() => {
+                  router.push("/why-a-career-in-se");
+                }}
+              >
+                <ListItemIcon>
+                  <EngineeringIcon sx={{ color: "orange" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography variant="body1">
+                      Why a career in Software Engineering
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ ml: 0 }}
+                onClick={() => {
+                  router.push("/careers");
+                }}
+              >
+                <ListItemIcon>
+                  <WorkIcon sx={{ color: "orange" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<Typography variant="body1">Career</Typography>}
+                />
+              </ListItemButton>
+            </List>
+          </Drawer>
         </Box>
         <Image
           src={"/assets/logo.jpg"}
@@ -112,7 +357,6 @@ function HomeAppBar() {
                 my: 2,
                 color: "orange",
                 display: "block",
-                bgcolor: "black",
                 textTransform: "capitalize",
               }}
             >

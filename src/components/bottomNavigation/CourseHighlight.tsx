@@ -19,8 +19,7 @@ export default function CourseHighlight() {
       >
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="24-Month
-          Online Program"
+          label="Online Program"
           icon={
             <Box mb={2}>
               {" "}

@@ -16,6 +16,8 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 
 function Footer() {
   const router = useRouter();
@@ -26,20 +28,51 @@ function Footer() {
           Follow us on social media
         </Typography>
         <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href =
+                "https://www.facebook.com/profile.php?id=100094022806445";
+            }}
+          >
             <FacebookIcon sx={{ color: "orange" }} />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href =
+                "https://instagram.com/blackwizardstechnology?igshid=NTc4MTIwNjQ2YQ==";
+            }}
+          >
             <InstagramIcon sx={{ color: "orange" }} />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href = "https://twitter.com/black69839";
+            }}
+          >
             <TwitterIcon sx={{ color: "orange" }} />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href = "https://www.youtube.com/@JohnSam-hj7mu";
+            }}
+          >
             <YouTubeIcon sx={{ color: "orange" }} />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href =
+                "https://chat.whatsapp.com/GcmKr8AFmUQH47vsJoNCB0";
+            }}
+          >
             <WhatsAppIcon sx={{ color: "orange" }} />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              window.location.href =
+                "https://www.tiktok.com/@user5116847818522";
+            }}
+          >
+            <Image src={"/assets/tiktok.png"} width={20} height={20} alt="" />
           </IconButton>
         </Box>
       </Box>
@@ -91,187 +124,16 @@ function Footer() {
           </CardContent>
         </Card>
       </Box>
-      <Box mt={5} display={"flex"} justifyContent={"flex-start"}>
-        <Box minWidth={150}>
-          {" "}
-          <List
-            subheader={
-              <ListSubheader
-                sx={{ bgcolor: "black", color: "white" }}
-                component="div"
-                id="nested-list-subheader"
-              >
-                Quick Links
-              </ListSubheader>
-            }
-          >
-            <ListItemButton
-              onClick={() => {
-                router.push("/");
-              }}
-            >
-              <ListItemText
-                primary={<Typography variant="caption">Home</Typography>}
-              />
-            </ListItemButton>
-            <ListItemButton
-              onClick={() => {
-                router.push("/about-us");
-              }}
-            >
-              <ListItemText
-                primary={<Typography variant="caption">About Us</Typography>}
-              />
-            </ListItemButton>
-            <ListItemButton
-              onClick={() => {
-                router.push("/mission");
-              }}
-            >
-              <ListItemText
-                primary={<Typography variant="caption">Mission</Typography>}
-              />
-            </ListItemButton>
-            <ListItemButton
-              onClick={() => {
-                router.push("/vision");
-              }}
-            >
-              <ListItemText
-                primary={<Typography variant="caption">Vision</Typography>}
-              />
-            </ListItemButton>
-            <ListItemButton
-              onClick={() => {
-                router.push("/careers");
-              }}
-            >
-              <ListItemText
-                primary={<Typography variant="caption">Careers</Typography>}
-              />
-            </ListItemButton>
-          </List>
-        </Box>
-        <Box>
-          {" "}
-          <List
-            sx={{ width: "100%" }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-              <ListSubheader
-                sx={{ bgcolor: "black", color: "white" }}
-                component="div"
-                id="nested-list-subheader"
-              >
-                Courses
-              </ListSubheader>
-            }
-          >
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Introduction To Software Engineering
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Introduction To Computing Systems
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Software Requirement Analysis & Engineering
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Software Architecture & Design
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Software Project Management
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Visualization(UI & UX)
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Introduction To Computer programming
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Programming in Javascript,Python & Golang
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">Web Development</Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">Mobile Development</Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">
-                    Database Management(SQL & NoSQL)
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText
-                primary={
-                  <Typography variant="caption">Software Testing</Typography>
-                }
-              />
-            </ListItemButton>
-          </List>
-        </Box>
+      <Box mt={5}>
+        <Link href={"/about-us"} style={{ color: "orange" }}>
+          About Us
+        </Link>
+        <Link href={"/careers"} style={{ marginLeft: "1rem", color: "orange" }}>
+          Careers
+        </Link>
+        <Link href={"/courses"} style={{ marginLeft: "1rem", color: "orange" }}>
+          Free Clases
+        </Link>
       </Box>
     </Box>
   );

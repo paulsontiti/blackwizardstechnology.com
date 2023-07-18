@@ -26,7 +26,7 @@ export default function CoursesCard() {
     >
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-          Our courses that will make you stand out in 24 months
+          Our courses
         </Typography>
         <CoursesAccordion />
       </CardContent>
@@ -38,14 +38,14 @@ export default function CoursesCard() {
             bgcolor: "orange",
             fontWeight: "bold",
             height: 50,
-            m: 5,
+            m: 3,
           }}
           variant="contained"
           onClick={() => {
-            router.push("/free-class");
+            router.push("/course-sign-up");
           }}
         >
-          Sign up for one month Free Class
+          Sign up for a Free Class
         </Button>
       </CardActions>
     </Card>
