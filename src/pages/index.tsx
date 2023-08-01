@@ -129,7 +129,7 @@ function CurrentEvent() {
     >
       <Box
         position={"relative"}
-        height={{ xs: "80vh", md: "100vh" }}
+        height={{ xs: "50vh", md: "80vh" }}
         maxWidth={"100%"}
         minWidth={"100%"}
       >
