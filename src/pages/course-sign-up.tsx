@@ -73,7 +73,6 @@ function SignUpForm({ course }: { course: string }) {
           router.push("/");
         }, 6000);
       } else {
-        console.log(data);
         setMsg(data.message);
         setColor("error");
         const refState = snackBarRef.current as any;
@@ -81,7 +80,7 @@ function SignUpForm({ course }: { course: string }) {
       }
     } catch (err: any) {
       console.log(err);
-      setMsg(err.response.data.message);
+      setMsg(err.message);
       setColor("error");
       const refState = snackBarRef.current as any;
       refState.handleClick();
