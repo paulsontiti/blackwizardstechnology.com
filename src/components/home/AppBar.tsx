@@ -63,309 +63,142 @@ function HomeAppBar() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ zIndex: 100, position: "fixed", top: 5 }}>
-      <Toolbar disableGutters sx={{ m: 3 }}>
-        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={() => {
-              setOpenDrawer(true);
-            }}
-            sx={{ color: "orange" }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <Drawer
-            anchor="left"
-            open={openDrawer}
-            onClose={() => {
-              setOpenDrawer(false);
-            }}
-            sx={{
-              maxWidth: "50vw",
-              padding: ".5rem",
-              bgcolor: "black",
-            }}
-          >
-            <List
-              sx={{
-                width: "100%",
-                maxWidth: 300,
-                pl: 0,
-                overflowY: "auto",
-                color: "white",
-                bgcolor: "black",
-                height: "100vh",
-              }}
-              component="nav"
-              aria-labelledby="nested-list-subheader"
-            >
-              <ListItemButton
-                sx={{ ml: 0 }}
-                onClick={() => {
-                  router.push("/");
-                }}
-              >
-                <ListItemIcon>
-                  <HomeIcon sx={{ color: "orange" }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={<Typography variant="body1">Home</Typography>}
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{ ml: 0 }}
-                onClick={() => {
-                  router.push("/about-us");
-                }}
-              >
-                <ListItemIcon>
-                  <InfoIcon sx={{ color: "orange" }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={<Typography variant="body1">About Us</Typography>}
-                />
-              </ListItemButton>
-
-              <ListItemButton
-                sx={{ ml: 0 }}
-                onClick={() => {
-                  router.push("/courses");
-                }}
-              >
-                <ListItemIcon>
-                  <SchoolIcon sx={{ color: "orange" }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={<Typography variant="body1">Courses</Typography>}
-                />
-                {/* {openCourses ? <ExpandLess /> : <ExpandMore />} */}
-              </ListItemButton>
-              {/* <Collapse in={openCourses} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      <ChildCareIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Software Engineering For JSS
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      <ChildFriendlyIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Software Engineering For SSS
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      {" "}
-                      <EngineeringIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Software Engineering
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      {" "}
-                      <IntegrationInstructionsIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Computer Programming In Javascript,Python & Golang
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      {" "}
-                      <WebIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">Web Development</Typography>
-                      }
-                    />
-                  </ListItemButton>
-
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      <DeveloperModeIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Mobile Development
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      {" "}
-                      <StorageIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Database Management Systems
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                  <ListItemButton
-                    sx={{ ml: 4 }}
-                    onClick={() => {
-                      router.push("/dashboard/job/current");
-                    }}
-                  >
-                    {" "}
-                    <ListItemIcon>
-                      <VisibilityIcon sx={{ color: "orange" }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={
-                        <Typography variant="body2">
-                          Visualization(UI,Ux and Graphics)
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                </List>
-              </Collapse> */}
-              <ListItemButton
-                sx={{ ml: 0 }}
-                onClick={() => {
-                  router.push("/why-a-career-in-se");
-                }}
-              >
-                <ListItemIcon>
-                  <EngineeringIcon sx={{ color: "orange" }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={
-                    <Typography variant="body1">
-                      Why a career in Software Engineering
-                    </Typography>
-                  }
-                />
-              </ListItemButton>
-              <ListItemButton
-                sx={{ ml: 0 }}
-                onClick={() => {
-                  router.push("/careers");
-                }}
-              >
-                <ListItemIcon>
-                  <WorkIcon sx={{ color: "orange" }} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={<Typography variant="body1">Career</Typography>}
-                />
-              </ListItemButton>
-            </List>
-          </Drawer>
-        </Box>
-        <Image
-          src={"/assets/logo.jpg"}
-          alt=""
-          width={200}
-          height={70}
+    <Toolbar disableGutters>
+      <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
           onClick={() => {
-            router.push("/");
+            setOpenDrawer(true);
           }}
-        />
-        <Box
+          sx={{ color: "orange" }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        <Drawer
+          anchor="left"
+          open={openDrawer}
+          onClose={() => {
+            setOpenDrawer(false);
+          }}
           sx={{
-            flexGrow: 1,
-            display: { xs: "none", md: "flex" },
-            alignItems: "center",
-            justifyContent: "flex-end",
+            maxWidth: "50vw",
+            padding: ".5rem",
+            bgcolor: "black",
           }}
         >
-          {pages.map((page) => (
-            <Button
-              key={page.name}
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: 300,
+              pl: 0,
+              overflowY: "auto",
+              color: "white",
+              bgcolor: "black",
+              height: "100vh",
+            }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+          >
+            <ListItemButton
+              sx={{ ml: 0 }}
               onClick={() => {
-                handleCloseNavMenu();
-                router.push(page.url);
-              }}
-              sx={{
-                my: 2,
-                color: "orange",
-                display: "block",
-                textTransform: "capitalize",
+                router.push("/");
               }}
             >
-              {page.name}
-            </Button>
-          ))}
-        </Box>
-      </Toolbar>
-    </Container>
+              <ListItemIcon>
+                <HomeIcon sx={{ color: "orange" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body1">Home</Typography>}
+              />
+            </ListItemButton>
+            <ListItemButton
+              sx={{ ml: 0 }}
+              onClick={() => {
+                router.push("/about-us");
+              }}
+            >
+              <ListItemIcon>
+                <InfoIcon sx={{ color: "orange" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body1">About Us</Typography>}
+              />
+            </ListItemButton>
+
+            <ListItemButton
+              sx={{ ml: 0 }}
+              onClick={() => {
+                router.push("/why-a-career-in-se");
+              }}
+            >
+              <ListItemIcon>
+                <EngineeringIcon sx={{ color: "orange" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="body1">
+                    Why a career in Software Engineering
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+            {/* <ListItemButton
+              sx={{ ml: 0 }}
+              onClick={() => {
+                router.push("/careers");
+              }}
+            >
+              <ListItemIcon>
+                <WorkIcon sx={{ color: "orange" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="body1">Career</Typography>}
+              />
+            </ListItemButton> */}
+          </List>
+        </Drawer>
+      </Box>
+      <Image
+        src={"/assets/logo.jpg"}
+        alt=""
+        width={200}
+        height={70}
+        onClick={() => {
+          router.push("/");
+        }}
+      />
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        {pages.map((page) => (
+          <Button
+            key={page.name}
+            onClick={() => {
+              handleCloseNavMenu();
+              router.push(page.url);
+            }}
+            sx={{
+              my: 2,
+              color: "orange",
+              display: "block",
+              textTransform: "capitalize",
+            }}
+          >
+            {page.name}
+          </Button>
+        ))}
+      </Box>
+    </Toolbar>
   );
 }
 export default HomeAppBar;

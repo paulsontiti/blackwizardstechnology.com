@@ -9,6 +9,7 @@ import CoursesCard from "@/components/cards/CoursesCard";
 import IntroStepper from "@/components/stepper/IntroStepper";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 //const inter = Inter({ subsets: ['latin'] })
 
@@ -17,14 +18,17 @@ export default function Home() {
     <>
       <main>
         <RootLayout>
-          {/* <Image
-            src={"/assets/software-engineering.jpeg"}
-            fill
-            alt="Black Wizards Technology"
-          /> */}
-          <IntroStepper />
-          <CareerCard />
+          <CurrentEvent />
+          <Box mt={{ xs: 2, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
+            <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
+              Course Highlights
+            </Typography>
+            <CourseHighlight />
+          </Box>
+          {/* <IntroStepper /> */}
 
+          <CareerCard />
+          {/* <CoursesCard /> */}
           <Box
             mt={5}
             mb={{ xs: 25, md: 10 }}
@@ -40,14 +44,6 @@ export default function Home() {
               Designed To Suit You
             </Typography>
             <DesignedToSuit />
-          </Box>
-          <CoursesCard />
-
-          <Box mt={{ xs: 10, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
-            <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
-              Course Highlights
-            </Typography>
-            <CourseHighlight />
           </Box>
         </RootLayout>
       </main>
@@ -120,6 +116,28 @@ function Courses() {
           What you need to learn to become an expert in Software Engineering
         </Typography>
       </Box>
+    </Box>
+  );
+}
+function CurrentEvent() {
+  const router = useRouter();
+  return (
+    <Box
+      onClick={() => {
+        router.push("/web-development");
+      }}
+    >
+      <Box
+        position={"relative"}
+        height={{ xs: "80vh", md: "100vh" }}
+        maxWidth={"100%"}
+        minWidth={"100%"}
+      >
+        <Image src={"/assets/web.jpg"} fill alt="Black Wizards Technology" />
+      </Box>
+      <Button fullWidth sx={{ bgcolor: "black", color: "orange" }}>
+        Learn More
+      </Button>
     </Box>
   );
 }

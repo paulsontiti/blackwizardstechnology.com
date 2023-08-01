@@ -124,7 +124,7 @@ function Footer() {
           </CardContent>
         </Card>
       </Box>
-      <Box mt={5}>
+      {/* <Box mt={5}>
         <Link href={"/about-us"} style={{ color: "orange" }}>
           About Us
         </Link>
@@ -134,7 +134,7 @@ function Footer() {
         <Link href={"/courses"} style={{ marginLeft: "1rem", color: "orange" }}>
           Free Clases
         </Link>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

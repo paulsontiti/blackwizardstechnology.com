@@ -7,7 +7,7 @@ const NoComputerBackGround = () => {
   const router = useRouter();
   return (
     <RootLayout>
-      <Container sx={{ mt: 15, mb: 10 }}>
+      <Box sx={{ mt: 15, mb: 10 }}>
         <Typography variant="h6" mb={2}>
           Did you know you can become a software Engineer without a background
           in Computer Engineering? Let us help you get it done
@@ -41,20 +41,47 @@ const NoComputerBackGround = () => {
           display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
+          flexWrap={"wrap"}
           mt={3}
         >
+          {" "}
           <Button
             onClick={() => {
-              router.push("/free-class");
+              router.push("/se");
             }}
             size="small"
+            fullWidth
             variant="contained"
-            sx={{ bgcolor: "orange", color: "black", fontWeight: "bold" }}
+            sx={{
+              bgcolor: "orange",
+              color: "black",
+              fontWeight: "bold",
+              height: 50,
+              minWidth: { xs: "100%", sm: 300 },
+              maxWidth: { xs: "100%", sm: 300 },
+            }}
           >
-            Sign Up For A Free Class
+            View Course details
+          </Button>
+          <Button
+            onClick={() => {
+              router.push("/questionnaire/course-sign-up?course=free-se-class");
+            }}
+            fullWidth
+            size="small"
+            variant="outlined"
+            sx={{
+              color: "orange",
+              fontWeight: "bold",
+              height: 50,
+              minWidth: { xs: "100%", sm: 300 },
+              maxWidth: { xs: "100%", sm: 300 },
+            }}
+          >
+            Join A Free Class
           </Button>
         </Box>
-      </Container>
+      </Box>
     </RootLayout>
   );
 };

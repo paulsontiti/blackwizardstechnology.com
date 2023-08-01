@@ -9,51 +9,91 @@ const WhyACareerInSE = () => {
     <RootLayout>
       <Container sx={{ mt: 15, mb: 10 }}>
         <Typography variant="h6" mb={2}>
-          Did you know you can become a software Engineer without a background
-          in Computer Engineering? Let us help you get it done
+          Why a Career in Software Engineering?
         </Typography>
         <Typography component={"p"} variant="body2">
-          While a computer science degree may provide a strong foundation and
-          give a more comprehensive understanding of theoretical concepts, it is
-          not the only path to mastering Software Engineering. Hands-on training
-          and practical experience are more valuable and cannot be overlooked in
-          the quest to master software engineering. We at Black Wizards
-          Technology prioritize practical skills and problem-solving abilities
-          and that is where our focus will be laid.
+          The tech industry is rapidly growing, and the demand for skilled tech
+          professionals is on the rise. According to Global Reports, the global
+          e-learning market size valued at $399.3 billion in 2022 is expected to
+          grow by 14% between 2023 and 2032, driven by the growing demand for IT
+          skills in various industries.
         </Typography>
         <Typography component={"p"} variant="body2">
-          It is important to us that everyone is carried along and that is why
-          we have programmed our courses for each package to begin with the
-          basics. We have a beginners extensive course which will cover the
-          fundamentals where we aim at giving our students a perfect
-          understanding of the entire computer system and its components. This
-          will form a basis for the subsequent programs that make up a software
-          Engineering course.
+          This presents a significant opportunity for IT experts to address the
+          growing demand for skilled tech professionals. As a Software
+          Engineering expert, there are so many accrued benefits, some of which
+          include;
         </Typography>
-        <Typography component={"p"} variant="body2">
-          We are not just offering to make you a software Engineer, we will
-          provide you with a step by step guide on how to get to the peak of
-          your career as a Software Engineer, be it as a beginner, an
-          intermediate student or an expert. Explore further for a more
-          comprehensive info on how to be a part of the Black Wizard Technology.
-        </Typography>
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          mt={3}
-        >
-          <Button
-            onClick={() => {
-              router.push("/free-class");
-            }}
-            size="small"
-            variant="contained"
-            sx={{ bgcolor: "orange", color: "black", fontWeight: "bold" }}
-          >
-            Sign Up For A Free Class
-          </Button>
-        </Box>
+        <ol>
+          <li>
+            <Typography fontWeight={"bold"}>
+              {" "}
+              High Demand and Job Growth:
+            </Typography>
+            <Typography variant="body1" mb={1}>
+              The demand for software engineers is consistently high and
+              continues to grow. In our increasingly digital world, software is
+              at the heart of many industries, including technology, finance,
+              healthcare, entertainment, and more. This high demand translates
+              into a wide range of job opportunities.
+            </Typography>
+          </li>
+          <li>
+            <Typography fontWeight={"bold"}>
+              {" "}
+              Remote Work and Flexibility:
+            </Typography>
+            <Typography variant="body1" mb={1}>
+              Software engineering often provides flexibility in terms of work
+              arrangements. With the rise of remote work after the COVID-19
+              outbreak, many software engineers have the opportunity to work
+              from anywhere. This flexibility can provide a better work-life
+              balance and the freedom to design your own schedule. Besides this,
+              there will also be opportunities to earn in foreign currencies as
+              jobs will not be limited to one country alone.
+            </Typography>
+          </li>
+          <li>
+            {" "}
+            <Typography fontWeight={"bold"}>
+              {" "}
+              Versatile Career Paths::
+            </Typography>
+            <Typography variant="body1" mb={1}>
+              Software engineering offers diverse career paths and
+              specializations. As a software engineer, you can choose to work on
+              a specific domain or industry that interests you, such as web
+              development, mobile app development, artificial intelligence, data
+              science, cybersecurity, etc. The versatility of the field allows
+              you to explore different areas, find your niche, and work with
+              comfort and ease.
+            </Typography>
+          </li>
+          <li>
+            {" "}
+            <Typography fontWeight={"bold"}>
+              {" "}
+              International Opportunities::
+            </Typography>
+            <Typography variant="body1" mb={1}>
+              In our world today where migration from developed countries is on
+              the rise. Software Engineering skills will give you an upper hand
+              as there are guaranteed job opportunities for Software Engineering
+              experts, this will reduce the stress of job scouting and ease
+              migration process.
+            </Typography>
+          </li>
+          <li>
+            {" "}
+            <Typography fontWeight={"bold"}>
+              {" "}
+              Impact and Innovation::
+            </Typography>
+            <Typography variant="body1" mb={1}>
+              {`    Software engineering has the potential to make a significant impact on society. From developing life-saving medical applications to building platforms that connect people globally, software engineers have the power to shape the world around them. The ability to create software that improves efficiency, solves real-world problems, and enhances people's lives can be highly fulfilling.`}
+            </Typography>
+          </li>
+        </ol>
       </Container>
     </RootLayout>
   );

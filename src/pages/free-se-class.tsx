@@ -2,7 +2,6 @@ import RootLayout from "@/app/layout";
 import {
   Box,
   Card,
-  CardContent,
   CardHeader,
   CardActions,
   Rating,
@@ -10,14 +9,15 @@ import {
   Button,
 } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import LockClockIcon from "@mui/icons-material/LockClock";
-import { useRouter } from "next/router";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import { CountDown } from "@/lib/functions";
+import { useRouter } from "next/router";
 import ClockCountDown from "@/components/ClockCountDown";
 
-const FreeWebDevelopmentClass = () => {
+const FreeSEClass = () => {
   const router = useRouter();
   return (
     <RootLayout>
@@ -37,16 +37,16 @@ const FreeWebDevelopmentClass = () => {
           mb={5}
         >
           <Box mb={5}>
-            <Typography mt={2} variant="h6" color={"orange"}>
+            <Typography mt={2} mb={1} variant="h6" color={"orange"}>
               {" "}
-              Free Web Development Course
+              Free Software Engineering Course
             </Typography>
-            <Typography>{`A one week class to show you how websites and web applications are created.`}</Typography>
+            <Typography>{`A 2 weeks course to show you the process of developing a software and roles that can best fit you.`}</Typography>
           </Box>
           <Typography mb={2}>
             On completion of this course, you are going to understand how
-            websites and web applications are developed. You are going to be
-            familiar with HTML, CSS and Javascript.
+            softwares are developed, the process involved and roles involved in
+            the process.
           </Typography>
           <Box display={"flex"} alignItems={"center"} mb={1}>
             <Rating
@@ -75,10 +75,10 @@ const FreeWebDevelopmentClass = () => {
                   <Box display={"flex"}>
                     <DateRangeIcon />
                     <Typography ml={1}>
-                      August 14,2023 - August 21,2023
+                      August 31,2023 - September 12,2023
                     </Typography>
                   </Box>
-                  <ClockCountDown endDate={new Date("2023,08,14")} />
+                  <ClockCountDown endDate={new Date("2023,08,31")} />
                 </Box>
               }
             />
@@ -101,7 +101,7 @@ const FreeWebDevelopmentClass = () => {
                 }}
                 onClick={() => {
                   router.push(
-                    "/questionnaire/course-sign-up?course=free-web-class"
+                    "/questionnaire/course-sign-up?course=free-se-class"
                   );
                 }}
               >
@@ -128,7 +128,7 @@ const FreeWebDevelopmentClass = () => {
   );
 };
 
-export default FreeWebDevelopmentClass;
+export default FreeSEClass;
 export function WebDevelopmentCourseDescription() {
   return (
     <Box p={3}>

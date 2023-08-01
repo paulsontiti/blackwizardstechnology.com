@@ -4,7 +4,6 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 export default function CareerCard() {
   const router = useRouter();
@@ -53,7 +52,7 @@ export default function CareerCard() {
             size="small"
             sx={{ color: "orange" }}
             onClick={() => {
-              router.push("/why-software-engineering");
+              router.push("/why-a-career-in-se");
             }}
           >
             Learn More

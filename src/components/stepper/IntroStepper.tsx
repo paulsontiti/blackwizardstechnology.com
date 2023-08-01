@@ -21,30 +21,16 @@ const images = [
     label:
       "While a computer science degree may provide a strong foundation and give a more comprehensive understanding of theoretical concepts, it is not the only path to mastering Software Engineering.",
     imgPath: "/assets/software-engineering.jpeg",
-    freeClassUrl: "/",
-    learnMoreurl: "",
+    freeClassUrl: "/free-se-class",
+    learnMoreurl: "/no-background",
   },
   {
     title: "Become a Web Developer in 12 Months",
     label: `Learn Css, Html, Javascript, ReactJs, NextJs and Material UI. No experience needed.
      We take you from beginner's level to intermediate level. You will build an Ecommerce website with the team`,
     imgPath: "/assets/web-development.jpg",
-    freeClassUrl: "/free-web-class",
+    freeClassUrl: `/free-web-class`,
     learnMoreurl: "/web-development",
-  },
-  {
-    label: "Bali, Indonesia",
-    title: "Become a Mobile Developer in 12 Months",
-    imgPath: "/assets/mobile-development.jpeg",
-    freeClassUrl: "/",
-    learnMoreurl: "",
-  },
-  {
-    label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
-    freeClassUrl: "/",
-    learnMoreurl: "",
   },
 ];
 
@@ -66,12 +52,13 @@ function IntroStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: "100%", flexGrow: 1, height: "100vh" }}>
+    <Box sx={{ maxWidth: "100%", flexGrow: 1, height: "80vh" }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        interval={10000}
       >
         {images.map((step, index) => (
           <div key={step.label}>
@@ -121,7 +108,7 @@ function IntroStepper() {
                 <Box
                   component="img"
                   sx={{
-                    height: "90vh",
+                    height: "70vh",
                     display: "block",
                     maxWidth: "100%",
                     overflow: "hidden",
