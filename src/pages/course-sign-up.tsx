@@ -73,12 +73,14 @@ function SignUpForm({ course }: { course: string }) {
           router.push("/");
         }, 6000);
       } else {
+        console.log(data);
         setMsg(data.message);
         setColor("error");
         const refState = snackBarRef.current as any;
         refState.handleClick();
       }
     } catch (err: any) {
+      console.log(err);
       setMsg(err.response.data.message);
       setColor("error");
       const refState = snackBarRef.current as any;
