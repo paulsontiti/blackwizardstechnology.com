@@ -82,7 +82,7 @@ function SignUpForm({ course }: { course: string }) {
         }
       } catch (err: any) {
         console.log(err);
-        setMsg(err.message);
+        setMsg(err.response.data.message);
         setColor("error");
         const refState = snackBarRef.current as any;
         refState.handleClick();
