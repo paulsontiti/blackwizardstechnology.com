@@ -57,30 +57,38 @@ function SignUpForm({ course }: { course: string }) {
   });
 
   const signUp = async (values: signUpDetails) => {
-    try {
-      const res = await axios({
-        method: "POST",
-        url: `${process.env.BWT_URL}api/users/signup`,
-        data: values,
-      });
-      const data = await res.data;
-      if (data.successful) {
-        setMsg(data.message);
-        setColor("success");
-        const refState = snackBarRef.current as any;
-        refState.handleClick();
-        setTimeout(() => {
-          router.push("/");
-        }, 6000);
-      } else {
-        setMsg(data.message);
+    values.course = course;
+    if (course) {
+      try {
+        const res = await axios({
+          method: "POST",
+          url: `${process.env.BWT_URL}api/users/signup`,
+          data: values,
+        });
+        const data = await res.data;
+        if (data.successful) {
+          setMsg(data.message);
+          setColor("success");
+          const refState = snackBarRef.current as any;
+          refState.handleClick();
+          setTimeout(() => {
+            router.push("/");
+          }, 6000);
+        } else {
+          setMsg(data.message);
+          setColor("error");
+          const refState = snackBarRef.current as any;
+          refState.handleClick();
+        }
+      } catch (err: any) {
+        console.log(err);
+        setMsg(err.message);
         setColor("error");
         const refState = snackBarRef.current as any;
         refState.handleClick();
       }
-    } catch (err: any) {
-      console.log(err);
-      setMsg(err.message);
+    } else {
+      setMsg("Please select a course");
       setColor("error");
       const refState = snackBarRef.current as any;
       refState.handleClick();

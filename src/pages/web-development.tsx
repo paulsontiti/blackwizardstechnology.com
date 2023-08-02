@@ -246,7 +246,7 @@ export function CourseCallToAction({ freeClassUrl }: { freeClassUrl: string }) {
           mb: 2,
         }}
         onClick={() => {
-          router.push("/course-sign-up");
+          router.push("/course-sign-up?course=web-development");
         }}
       >
         Sign Up

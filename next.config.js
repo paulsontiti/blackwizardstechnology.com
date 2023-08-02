@@ -6,7 +6,7 @@ const nextConfig = {
   env:{
     MONGODB_URI : 'mongodb+srv://titidprogrammer:30041987Titile@cluster0.69e5w7x.mongodb.net/?retryWrites=true&w=majority',
     //'mongodb+srv://blackwizardstechnology:weareblackwizardstechnology@blackwizardstechnology.acaobdo.mongodb.net/',
-    //'mongodb://127.0.0.1:27017/smnk',
+    //'mongodb://127.0.0.1:27017/bwt',
     BWT_URL: 'https://www.blackwizardstechnology.com/',
     //https://www.blackwizardstechnology.com/',
     //''http://localhost:3000/',

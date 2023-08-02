@@ -46,5 +46,5 @@ const userSchema = new Schema(
 //         next(error)
 //     }
 // })
-const User = models.User || model("User", userSchema);
-export default User;
+const BWTUser = models.BWTUser || model("BWTUser", userSchema);
+export default BWTUser;

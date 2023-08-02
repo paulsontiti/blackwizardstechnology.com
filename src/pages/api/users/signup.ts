@@ -1,4 +1,4 @@
-import User from "@/lib/models/user";
+import BWTUser from "@/lib/models/user";
 import dbConnect from "@/lib/mongoose";
 import bcrypt from "bcrypt";
 
@@ -9,11 +9,11 @@ import bcrypt from "bcrypt";
   };
 export default async function handler(req: any, res: any) {
   await dbConnect();
-  const { email, phone, password,fullName } = req.body;
+  const { email, phone, password,fullName,course} = req.body;
 
-  if (email && phone && password && fullName) {
+  if (email && phone && password && fullName && course) {
     try {
-      const existingUserWithEmail = await User.findOne({ email: email });
+      const existingUserWithEmail = await BWTUser.findOne({ email: email });
 
       if (existingUserWithEmail) {
         res
@@ -24,7 +24,7 @@ export default async function handler(req: any, res: any) {
             user: {},
           });
       } else {
-        const existingUserWithPhone = await User.findOne({ phone: phone });
+        const existingUserWithPhone = await BWTUser.findOne({ phone: phone });
         if (existingUserWithPhone) {
           res
             .status(400)
@@ -34,7 +34,7 @@ export default async function handler(req: any, res: any) {
               user: {},
             });
         } else {
-          const newUser = await User.create(req.body);
+          const newUser = await BWTUser.create(req.body);
           newUser.password = await hashPassword(newUser.password);
           const user = await newUser.save();
           res
