@@ -51,7 +51,7 @@ const WebDevelopment = () => {
             you a job of ₦600,000 - ₦1,200,000 in your first year and you work
             remotely from the comfort of your home!!!
           </Typography>
-          <Box display={"flex"} alignItems={"center"} mb={1}>
+          {/* <Box display={"flex"} alignItems={"center"} mb={1}>
             <Rating
               name="half-rating-read"
               size="small"
@@ -66,7 +66,7 @@ const WebDevelopment = () => {
             <Typography variant="caption" component={"span"} ml={1}>
               100 students
             </Typography>
-          </Box>
+          </Box> */}
           <Box display={"flex"} alignItems={"center"}>
             <Typography variant="caption" component={"span"} mr={1}>
               Created by{" "}
