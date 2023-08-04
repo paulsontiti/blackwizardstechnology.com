@@ -33,7 +33,7 @@ export default function ClockCountDown({ endDate }: { endDate: Date }) {
               hours === "-1" ? 0 : hours
             } hours, ${
               minutes === "-1" ? 0 : minutes
-            } minutes left to join this class`}
+            } minutes left for this offer`}
           </Typography>
         </Box>
       )}

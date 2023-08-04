@@ -12,9 +12,9 @@ import {
 import Link from "next/link";
 import React from "react";
 import DoneIcon from "@mui/icons-material/Done";
-import LockClockIcon from "@mui/icons-material/LockClock";
 import { useRouter } from "next/router";
 import ClockCountDown from "@/components/ClockCountDown";
+import Comments from "@/components/Comments";
 
 const WebDevelopment = () => {
   return (
@@ -99,7 +99,7 @@ const WebDevelopment = () => {
                 <li>Get ₦5,000 for anybody that you refer to this program</li>
               </ul>
             </CardContent>
-            <CourseCallToAction freeClassUrl="/free-web-class" />
+            <CourseCallToAction course="web-develpment" />
           </Card>
         </Box>
         <Card
@@ -169,6 +169,10 @@ const WebDevelopment = () => {
               <Typography variant="h6">Description</Typography>
               <WebDevelopmentCourseDescription />
             </Box>
+            <Comments
+              subject="web develpment course"
+              title="What do you think about this course"
+            />
           </CardContent>
         </Card>
       </Box>
@@ -226,7 +230,7 @@ export function WebDevelopmentCourseDescription() {
   );
 }
 
-export function CourseCallToAction({ freeClassUrl }: { freeClassUrl: string }) {
+export function CourseCallToAction({ course }: { course: string }) {
   const router = useRouter();
   return (
     <CardActions
@@ -246,7 +250,7 @@ export function CourseCallToAction({ freeClassUrl }: { freeClassUrl: string }) {
           mb: 2,
         }}
         onClick={() => {
-          router.push("/course-sign-up?course=web-development");
+          router.push(`/course-sign-up?course=${course}`);
         }}
       >
         Sign Up

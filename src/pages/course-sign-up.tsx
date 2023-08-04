@@ -22,7 +22,7 @@ const SignUp = () => {
   const course = router.query.course as string;
   return (
     <RootLayout>
-      <Container sx={{ mt: 20, mb: 10 }}>
+      <Container sx={{ mt: 10, mb: 10 }}>
         <Typography variant="h6" mb={5}>
           {` Sign Up and let's take you to your dream land`}
         </Typography>

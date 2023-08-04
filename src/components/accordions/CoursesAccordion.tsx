@@ -58,126 +58,127 @@ export default function CoursesAccordion() {
     };
 
   return (
-    <div style={{ marginTop: "1rem" }}>
-      {/* <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>
-            Software Engineering For JSS Students - 3 years
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>
-            Software Engineering For SSS Students - 3 years
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion> */}
-      <Accordion
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Software Engineering - 12 months</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <SECourseDescription />
-          <CourseCallToAction freeClassUrl="" />
-        </AccordionDetails>
-      </Accordion>{" "}
-      <Accordion
-        expanded={expanded === "panel7"}
-        onChange={handleChange("panel7")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>
-            Computer Programming In Javascript,Python & Golang - 12 months
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ComputerProgrammingCourseDescription />
-          <CourseCallToAction freeClassUrl="" />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel9"}
-        onChange={handleChange("panel9")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Web Development - 12 months</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <WebDevelopmentCourseDescription />
-          <CourseCallToAction freeClassUrl="/free-web-class" />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel10"}
-        onChange={handleChange("panel10")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Mobile Development - 12 months</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <MobileDevelopmentCourseDescription />
-          <CourseCallToAction freeClassUrl="" />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel12"}
-        onChange={handleChange("panel12")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Database Management Systems - 12 months</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <DBCourseDescription />
-          <CourseCallToAction freeClassUrl="" />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel12"}
-        onChange={handleChange("panel12")}
-        TransitionProps={{ unmountOnExit: true }}
-      >
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Visualization(UI,Ux and Graphics) - 12 months</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <VisualizationCourseDescription />
-          <CourseCallToAction freeClassUrl="" />
-        </AccordionDetails>
-      </Accordion>
-    </div>
+    <p></p>
+    // <div style={{ marginTop: "1rem" }}>
+    //   {/* <Accordion
+    //     expanded={expanded === "panel1"}
+    //     onChange={handleChange("panel1")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+    //       <Typography>
+    //         Software Engineering For JSS Students - 3 years
+    //       </Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <Typography>
+    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+    //         malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
+    //         dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
+    //         lacus ex, sit amet blandit leo lobortis eget.
+    //       </Typography>
+    //     </AccordionDetails>
+    //   </Accordion>
+    //   <Accordion
+    //     expanded={expanded === "panel2"}
+    //     onChange={handleChange("panel2")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+    //       <Typography>
+    //         Software Engineering For SSS Students - 3 years
+    //       </Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <Typography>
+    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+    //         malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
+    //         dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
+    //         lacus ex, sit amet blandit leo lobortis eget.
+    //       </Typography>
+    //     </AccordionDetails>
+    //   </Accordion> */}
+    //   <Accordion
+    //     expanded={expanded === "panel3"}
+    //     onChange={handleChange("panel3")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+    //       <Typography>Software Engineering - 12 months</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <SECourseDescription />
+    //       <CourseCallToAction freeClassUrl="" />
+    //     </AccordionDetails>
+    //   </Accordion>{" "}
+    //   <Accordion
+    //     expanded={expanded === "panel7"}
+    //     onChange={handleChange("panel7")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+    //       <Typography>
+    //         Computer Programming In Javascript,Python & Golang - 12 months
+    //       </Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <ComputerProgrammingCourseDescription />
+    //       <CourseCallToAction freeClassUrl="" />
+    //     </AccordionDetails>
+    //   </Accordion>
+    //   <Accordion
+    //     expanded={expanded === "panel9"}
+    //     onChange={handleChange("panel9")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+    //       <Typography>Web Development - 12 months</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <WebDevelopmentCourseDescription />
+    //       <CourseCallToAction freeClassUrl="/free-web-class" />
+    //     </AccordionDetails>
+    //   </Accordion>
+    //   <Accordion
+    //     expanded={expanded === "panel10"}
+    //     onChange={handleChange("panel10")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+    //       <Typography>Mobile Development - 12 months</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <MobileDevelopmentCourseDescription />
+    //       <CourseCallToAction freeClassUrl="" />
+    //     </AccordionDetails>
+    //   </Accordion>
+    //   <Accordion
+    //     expanded={expanded === "panel12"}
+    //     onChange={handleChange("panel12")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+    //       <Typography>Database Management Systems - 12 months</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <DBCourseDescription />
+    //       <CourseCallToAction freeClassUrl="" />
+    //     </AccordionDetails>
+    //   </Accordion>
+    //   <Accordion
+    //     expanded={expanded === "panel12"}
+    //     onChange={handleChange("panel12")}
+    //     TransitionProps={{ unmountOnExit: true }}
+    //   >
+    //     <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+    //       <Typography>Visualization(UI,Ux and Graphics) - 12 months</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <VisualizationCourseDescription />
+    //       <CourseCallToAction freeClassUrl="" />
+    //     </AccordionDetails>
+    //   </Accordion>
+    // </div>
   );
 }
 

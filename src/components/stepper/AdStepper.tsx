@@ -1,40 +1,46 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import SwipeableViews from "react-swipeable-views";
-import { useRouter } from "next/router";
-import { autoPlay } from "react-swipeable-views-utils";
 import MobileStepper from "@mui/material/MobileStepper";
+import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+import AdvertCard from "../cards/AdvertCard";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
 const images = [
   {
-    imgPath: "/assets/web1.jpg",
+    imgPath: "/assets/nysc.jpg",
     url: "/web-development",
-  },
-  {
-    imgPath: "/assets/web2.jpg",
-    url: "/web-development",
+    title: "Hello",
+    description: "web-developmentweb-developmentweb-development",
   },
   {
     imgPath: "/assets/career.jpg",
     url: "/web-development",
+    title: "Hello",
+    description:
+      "web-developmentweb-developmentweb-developmentweb-developmentweb-development",
   },
-  {
-    imgPath: "/assets/nysc.jpg",
-    url: "/web-development",
-  },
+  // {
+  //   imgPath: "/assets/career.jpg",
+  //   url: "/web-development",
+  // },
+  // {
+  //   imgPath: "/assets/nysc.jpg",
+  //   url: "/web-development",
+  // },
 ];
 
-function IntroStepper() {
+function AdsStepper() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+
   const maxSteps = images.length;
-  const router = useRouter();
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -48,7 +54,20 @@ function IntroStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: "100%", flexGrow: 1 }}>
+    <Box>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          height: 50,
+          pl: 2,
+          bgcolor: "background.default",
+        }}
+      >
+        {images[activeStep].title}
+      </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -56,26 +75,19 @@ function IntroStepper() {
         enableMouseEvents
         interval={10000}
       >
-        {images.map((step, index) => (
-          <div key={step.imgPath}>
+        {images.map((ad: any, index: number) => (
+          <div key={ad.imgPath}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <>
-                <Box
-                  component="img"
-                  onClick={() => {
-                    router.push("/web-development");
-                  }}
-                  sx={{ objectFit: "contain" }}
-                  width={"100vw"}
-                  height={"auto"}
-                  src={step.imgPath}
-                  alt={step.imgPath}
-                />
-              </>
+              <AdvertCard
+                title={ad.title}
+                message={ad.description}
+                src={ad.imgPath}
+              />
             ) : null}
           </div>
         ))}
       </AutoPlaySwipeableViews>
+
       <MobileStepper
         steps={maxSteps}
         position="static"
@@ -109,4 +121,4 @@ function IntroStepper() {
   );
 }
 
-export default IntroStepper;
+export default AdsStepper;

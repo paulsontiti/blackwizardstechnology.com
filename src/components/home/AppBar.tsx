@@ -66,14 +66,10 @@ function HomeAppBar() {
     <Toolbar disableGutters>
       <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
         <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
           onClick={() => {
             setOpenDrawer(true);
           }}
-          sx={{ color: "orange" }}
+          sx={{ color: "black" }}
         >
           <MenuIcon />
         </IconButton>
@@ -178,6 +174,7 @@ function HomeAppBar() {
           display: { xs: "none", md: "flex" },
           alignItems: "center",
           justifyContent: "flex-end",
+          mr: 5,
         }}
       >
         {pages.map((page) => (
@@ -189,7 +186,7 @@ function HomeAppBar() {
             }}
             sx={{
               my: 2,
-              color: "orange",
+              color: "black",
               display: "block",
               textTransform: "capitalize",
             }}
