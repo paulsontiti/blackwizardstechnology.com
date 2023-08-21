@@ -53,7 +53,8 @@ function Footer() {
           </IconButton>
           <IconButton
             onClick={() => {
-              window.location.href = "https://www.youtube.com/@JohnSam-hj7mu";
+              window.location.href =
+                "https://www.youtube.com/channel/UComBxZWqlLgol-H9M0LT3Aw";
             }}
           >
             <YouTubeIcon sx={{ color: "orange" }} />

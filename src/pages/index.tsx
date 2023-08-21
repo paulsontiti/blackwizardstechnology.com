@@ -5,10 +5,8 @@ import RootLayout from "@/app/layout";
 import CourseHighlight from "@/components/bottomNavigation/CourseHighlight";
 import DesignedToSuit from "@/components/bottomNavigation/DesignedToSuit";
 import CareerCard from "@/components/cards/CareerCard";
-import CoursesCard from "@/components/cards/CoursesCard";
-import AdsStepper from "@/components/stepper/AdStepper";
 import IntroStepper from "@/components/stepper/IntroStepper";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -19,7 +17,20 @@ export default function Home() {
     <>
       <main>
         <RootLayout>
-          <IntroStepper />
+          <Box
+            mb={2}
+            component="img"
+            onClick={() => {
+              window.location.href =
+                " https://chat.whatsapp.com/KJaxb5SuzqXGx2BTex1Hd4";
+            }}
+            sx={{ objectFit: "contain" }}
+            width={"100vw"}
+            height={"auto"}
+            src="/assets/cover-photo.jpg"
+            alt="cover photo"
+          />
+
           {/* <CurrentEvent /> */}
           <Box mt={{ xs: 2, lg: 5 }} mb={{ xs: 50, sm: 30, md: 20 }}>
             <Typography variant="h6" textAlign={"center"} fontWeight={"bold"}>
@@ -29,7 +40,7 @@ export default function Home() {
           </Box>
           {/* <AdsStepper /> */}
           {/* <IntroStepper /> */}
-
+          <IntroStepper />
           <CareerCard />
           {/* <CoursesCard /> */}
           <Box

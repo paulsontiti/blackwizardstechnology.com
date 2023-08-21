@@ -9,7 +9,7 @@ import {
   TextField,
   AlertColor,
 } from "@mui/material";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useRef, useState } from "react";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { string, object } from "yup";
@@ -419,7 +419,7 @@ function Questionnaire({ destUrl }: { destUrl: string }) {
     </>
   );
 }
-function BlackRequiredField({
+export function BlackRequiredField({
   helperText,
   label,
   name,
@@ -429,16 +429,19 @@ function BlackRequiredField({
   name: string;
 }) {
   return (
-    <Field
-      as={TextField}
-      label={label}
-      helperText={helperText}
-      variant="standard"
-      required
-      sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
-      InputLabelProps={{ shrink: true }}
-      name={name}
-    />
+    <>
+      <Field
+        as={TextField}
+        label={label}
+        helperText={helperText}
+        variant="standard"
+        required
+        sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
+        InputLabelProps={{ shrink: true }}
+        name={name}
+      />
+      <BlackErrorMessage name={name} />
+    </>
   );
 }
 function BlackRadioButton({ label, name }: { label: string; name: string }) {
@@ -449,7 +452,7 @@ function BlackRadioButton({ label, name }: { label: string; name: string }) {
     </label>
   );
 }
-function BlackField({
+export function BlackField({
   helperText,
   label,
   name,
@@ -459,14 +462,75 @@ function BlackField({
   name: string;
 }) {
   return (
-    <Field
-      as={TextField}
-      label={label}
-      helperText={helperText}
-      variant="standard"
-      sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
-      InputLabelProps={{ shrink: true }}
-      name={name}
-    />
+    <>
+      <Field
+        as={TextField}
+        label={label}
+        helperText={helperText}
+        variant="standard"
+        sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
+        InputLabelProps={{ shrink: true }}
+        name={name}
+      />
+    </>
+  );
+}
+function BlackErrorMessage({ name }: { name: string }) {
+  return (
+    <Box color={"red"} fontSize={12} mb={2}>
+      <ErrorMessage name={name} />
+    </Box>
+  );
+}
+export function BlackPasswordField({
+  helperText,
+  label,
+  name,
+}: {
+  helperText: string;
+  label: string;
+  name: string;
+}) {
+  return (
+    <>
+      <Field
+        as={TextField}
+        label={label}
+        helperText={helperText}
+        variant="standard"
+        type="password"
+        required
+        sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
+        InputLabelProps={{ shrink: true }}
+        name={name}
+      />
+      <BlackErrorMessage name={name} />
+    </>
+  );
+}
+export function BlackEmailField({
+  helperText,
+  label,
+  name,
+}: {
+  helperText: string;
+  label: string;
+  name: string;
+}) {
+  return (
+    <>
+      <Field
+        as={TextField}
+        label={label}
+        helperText={helperText}
+        variant="standard"
+        type="email"
+        required
+        sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
+        InputLabelProps={{ shrink: true }}
+        name={name}
+      />
+      <BlackErrorMessage name={name} />
+    </>
   );
 }

@@ -6,27 +6,34 @@ import {
   CircularProgress,
   Container,
   Typography,
-  TextField,
   AlertColor,
 } from "@mui/material";
-import { Formik, Form, Field } from "formik";
-import React, { useRef, useState } from "react";
+import { Formik, Form } from "formik";
+import React, { useRef, useEffect, useState } from "react";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { string, object } from "yup";
-import axios from "axios";
+import { string, object, ref } from "yup";
 import SnackbarComponent from "@/components/snackbars/Snackbar";
 import { useRouter } from "next/router";
+import {
+  BlackEmailField,
+  BlackField,
+  BlackPasswordField,
+  BlackRequiredField,
+} from "./questionnaire/[destUrl]";
+import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { useDispatch } from "react-redux";
+import { signUp, updateState } from "@/store/slices/userSlice";
 
 const SignUp = () => {
   const router = useRouter();
-  const course = router.query.course as string;
   return (
     <RootLayout>
       <Container sx={{ mt: 10, mb: 10 }}>
         <Typography variant="h6" mb={5}>
           {` Sign Up and let's take you to your dream land`}
         </Typography>
-        <SignUpForm course={course} />
+        <SignUpForm />
       </Container>
     </RootLayout>
   );
@@ -34,69 +41,62 @@ const SignUp = () => {
 
 export default SignUp;
 
-type signUpDetails = {
+export type signUpDetails = {
   fullName: string;
   email: string;
   phone: string;
   password: string;
-  course: string;
+  userName: string;
 };
 
-function SignUpForm({ course }: { course: string }) {
+function SignUpForm() {
+  const { user, successful, response } = useSelector(
+    (state: RootState) => state.users
+  );
+
   const [msg, setMsg] = useState("");
   const [color, setColor] = useState<AlertColor>("error");
   //declare refs
   const snackBarRef = useRef();
 
   const router = useRouter();
-  const schema = object().shape({
-    fullName: string().required("Your full name is Required"),
-    email: string().email("Invalid Email"),
-    phone: string().required("Your Phone Number is Required"),
-    password: string().required("Your Password is Required"),
-  });
-
-  const signUp = async (values: signUpDetails) => {
-    values.course = course;
-    if (course) {
-      try {
-        const res = await axios({
-          method: "POST",
-          url: `${process.env.BWT_URL}api/users/signup`,
-          data: values,
-        });
-        const data = await res.data;
-        if (data.successful) {
-          setMsg(data.message);
-          setColor("success");
-          const refState = snackBarRef.current as any;
-          refState.handleClick();
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (response) {
+      if (successful) {
+        setMsg(response);
+        setColor("success");
+        const refState = snackBarRef.current as any;
+        refState.handleClick();
+        dispatch(updateState());
+        if (user._id) {
           setTimeout(() => {
-            router.push("/");
-          }, 6000);
-        } else {
-          setMsg(data.message);
-          setColor("error");
-          const refState = snackBarRef.current as any;
-          refState.handleClick();
+            router.push("/dashboard");
+          }, 3000);
         }
-      } catch (err: any) {
-        console.log(err);
-        setMsg(err.response.data.message);
+      } else {
+        setMsg(response);
         setColor("error");
         const refState = snackBarRef.current as any;
         refState.handleClick();
+        dispatch(updateState());
       }
-    } else {
-      setMsg("Please select a course");
-      setColor("error");
-      const refState = snackBarRef.current as any;
-      refState.handleClick();
     }
-  };
+  }, [user, router, successful, response, dispatch]);
+
+  const schema = object().shape({
+    fullName: string().required("Your full name is required"),
+    email: string().email("Invalid Email").required("Email is required"),
+    phone: string().required("Your Phone Number is required"),
+    password: string().required("Your Password is required"),
+    confirmPassword: string()
+      .oneOf([ref("password"), ""], "Both passwords must match")
+      .required("Confirm password is required"),
+  });
+
   //sign up submit handler
   const submitHandler = async (values: signUpDetails) => {
-    await signUp(values);
+    await dispatch(signUp(values));
   };
   //formik submit handler
   const formikSubmitHandler = (values: any, formikHelpers: any) => {
@@ -126,7 +126,7 @@ function SignUpForm({ course }: { course: string }) {
     phone: "",
     email: "",
     password: "",
-    course,
+    userName: "",
   };
   return (
     <>
@@ -137,7 +137,7 @@ function SignUpForm({ course }: { course: string }) {
         onSubmit={formikSubmitHandler}
         enableReinitialize
       >
-        {({ values, touched, isSubmitting, isValid, isValidating, errors }) => (
+        {({ isSubmitting, isValid, isValidating }) => (
           <Form>
             <Box
               mt={"1rem"}
@@ -164,10 +164,20 @@ function SignUpForm({ course }: { course: string }) {
                 name="phone"
                 helperText="Your Whatsapp Number is preferrable"
               />
+              <BlackField
+                label="User Name"
+                name="userName"
+                helperText="This will serve as your referral code"
+              />
               <BlackPasswordField
                 label="Password"
                 helperText="Please enter your password"
                 name="password"
+              />
+              <BlackPasswordField
+                label="Confirm Password"
+                helperText="Please confirm your password"
+                name="confirmPassword"
               />
               <Box
                 display={"flex"}
@@ -205,81 +215,5 @@ function SignUpForm({ course }: { course: string }) {
         )}
       </Formik>
     </>
-  );
-}
-function BlackRequiredField({
-  helperText,
-  label,
-  name,
-}: {
-  helperText: string;
-  label: string;
-  name: string;
-}) {
-  return (
-    <Field
-      as={TextField}
-      label={label}
-      helperText={helperText}
-      variant="standard"
-      required
-      sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
-      InputLabelProps={{ shrink: true }}
-      name={name}
-    />
-  );
-}
-function BlackPasswordField({
-  helperText,
-  label,
-  name,
-}: {
-  helperText: string;
-  label: string;
-  name: string;
-}) {
-  return (
-    <Field
-      as={TextField}
-      label={label}
-      helperText={helperText}
-      variant="standard"
-      type="password"
-      required
-      sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
-      InputLabelProps={{ shrink: true }}
-      name={name}
-    />
-  );
-}
-function BlackEmailField({
-  helperText,
-  label,
-  name,
-}: {
-  helperText: string;
-  label: string;
-  name: string;
-}) {
-  return (
-    <Field
-      as={TextField}
-      label={label}
-      helperText={helperText}
-      variant="standard"
-      type="email"
-      required
-      sx={{ minWidth: 300, maxWidth: 350, mb: 2, mr: 3 }}
-      InputLabelProps={{ shrink: true }}
-      name={name}
-    />
-  );
-}
-function BlackRadioButton({ label, name }: { label: string; name: string }) {
-  return (
-    <label style={{ marginBottom: "1rem" }}>
-      <Field type="radio" name={name} value={label} />
-      {label}
-    </label>
   );
 }

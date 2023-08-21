@@ -12,13 +12,17 @@ import {
   CircularProgress,
   Divider,
   Avatar,
+  IconButton,
+  Badge,
 } from "@mui/material";
 import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { number, object, string } from "yup";
 import SnackbarComponent from "./snackbars/Snackbar";
 import { useRef, useState, useEffect } from "react";
-import InfoAlert from "./alerts/InfoAlert";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import InfoAlert from "./alerts/Info";
 
 type CommentObj = {
   comment: string;
@@ -407,30 +411,32 @@ function Comment({ comment }: { comment: CommentObj }) {
           </Box>
         }
       />
-      <Box>
-        <Button
-          onClick={() => {
-            setLike(false);
-            setLikeCount(likeCount + 1);
-            likeAcomment(comment._id ?? "", like);
-          }}
-          sx={{ textTransform: "lowercase" }}
-          disabled={likeCount > 1}
-        >
-          {"like " + `${comment.likes ? `(${comment.likes})` : ""}`}
-        </Button>{" "}
-        <Button
-          sx={{ textTransform: "lowercase" }}
-          disabled={disLikeCount > 1}
-          onClick={() => {
-            setDisLike(false);
-            setDisLikeCount(disLikeCount + 1);
-            disLikeAcomment(comment._id ?? "", disLike);
-          }}
-        >
-          {" "}
-          {"dislike " + `${comment.disLikes ? `(${comment.disLikes})` : ""}`}
-        </Button>{" "}
+      <Box mt={2}>
+        <Badge badgeContent={comment.likes} color="primary" sx={{ mr: 5 }}>
+          <IconButton
+            disabled={likeCount > 1}
+            onClick={() => {
+              setLike(false);
+              setLikeCount(likeCount + 1);
+              likeAcomment(comment._id ?? "", like);
+            }}
+          >
+            <ThumbUpAltIcon />
+          </IconButton>{" "}
+        </Badge>
+
+        <Badge badgeContent={comment.disLikes} color="primary">
+          <IconButton
+            disabled={disLikeCount > 1}
+            onClick={() => {
+              setDisLike(false);
+              setDisLikeCount(disLikeCount + 1);
+              disLikeAcomment(comment._id ?? "", disLike);
+            }}
+          >
+            <ThumbDownIcon />
+          </IconButton>{" "}
+        </Badge>
         <ReplyForm commentId={comment._id ?? ""} />
       </Box>
 
@@ -470,31 +476,33 @@ function Reply({ reply }: { reply: CommentReplyObj }) {
           </Box>
         }
       />
-      <Box ml={5}>
-        <Button
-          onClick={() => {
-            setLike(false);
-            setLikeCount(likeCount + 1);
-            likeAReply(reply._id ?? "", like);
-          }}
-          sx={{ textTransform: "lowercase" }}
-          disabled={likeCount > 1}
-        >
-          {"like " + `${reply.likes ? `(${reply.likes})` : ""}`}
-        </Button>{" "}
-        <Button
-          sx={{ textTransform: "lowercase" }}
-          disabled={disLikeCount > 1}
-          onClick={() => {
-            setDisLike(false);
-            setDisLikeCount(disLikeCount + 1);
+      <Box mt={2} ml={5}>
+        <Badge badgeContent={reply.likes} color="primary" sx={{ mr: 5 }}>
+          <IconButton
+            disabled={likeCount > 1}
+            onClick={() => {
+              setLike(false);
+              setLikeCount(likeCount + 1);
+              likeAReply(reply._id ?? "", like);
+            }}
+          >
+            <ThumbUpAltIcon />
+          </IconButton>{" "}
+        </Badge>
 
-            disLikeAReply(reply._id ?? "", disLike);
-          }}
-        >
-          {" "}
-          {"dislike " + `${reply.disLikes ? `(${reply.disLikes})` : ""}`}
-        </Button>{" "}
+        <Badge badgeContent={reply.disLikes} color="primary">
+          <IconButton
+            disabled={disLikeCount > 1}
+            onClick={() => {
+              setDisLike(false);
+              setDisLikeCount(disLikeCount + 1);
+              disLikeAReply(reply._id ?? "", disLike);
+            }}
+          >
+            <ThumbDownIcon />
+          </IconButton>{" "}
+        </Badge>
+        <ReplyForm commentId={reply._id ?? ""} />
       </Box>
     </Box>
   );

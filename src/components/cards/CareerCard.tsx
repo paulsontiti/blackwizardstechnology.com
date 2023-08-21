@@ -21,7 +21,7 @@ export default function CareerCard() {
         opacity: 0.9,
       }}
     >
-      <Box
+      {/* <Box
         component="img"
         sx={{
           height: 400,
@@ -31,11 +31,11 @@ export default function CareerCard() {
         }}
         src={"/assets/career.png"}
         alt="Why a career in Software Engineering"
-      />
+      /> */}
 
       <Box m={2} width={{ xs: "98%", sm: "50%" }}>
         <Typography gutterBottom variant="h6" color="orange" p={2}>
-          Why a career in Software Engineering?
+          Why a career in the tech industry in this bad economy?
         </Typography>
         <Typography variant="body2" color="white" pl={2}>
           The tech industry is rapidly growing, and the demand for skilled tech

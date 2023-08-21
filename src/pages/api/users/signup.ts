@@ -9,9 +9,9 @@ import bcrypt from "bcrypt";
   };
 export default async function handler(req: any, res: any) {
   await dbConnect();
-  const { email, phone, password,fullName,course} = req.body;
+  const { email, phone, password,fullName} = req.body;
 
-  if (email && phone && password && fullName && course) {
+  if (email && phone && password && fullName) {
     try {
       const existingUserWithEmail = await BWTUser.findOne({ email: email });
 
@@ -41,7 +41,7 @@ export default async function handler(req: any, res: any) {
             .status(201)
             .json({
               successful: true,
-              message: "Your account was successfully created. You will receive an SMS containing your reservation details",
+              message: "Your account was successfully created. You will be redirected to your dashboard",
               user,
             });
         }
