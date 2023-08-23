@@ -62,7 +62,7 @@ function Footer() {
           <IconButton
             onClick={() => {
               window.location.href =
-                "https://chat.whatsapp.com/GcmKr8AFmUQH47vsJoNCB0";
+                " https://chat.whatsapp.com/C5yfcxVJjxBDgGpixro9Qb";
             }}
           >
             <WhatsAppIcon sx={{ color: "orange" }} />

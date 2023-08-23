@@ -253,7 +253,7 @@ function Questionnaire({ destUrl }: { destUrl: string }) {
         refState.handleClick();
         setTimeout(() => {
           window.location.href =
-            "https://chat.whatsapp.com/GcmKr8AFmUQH47vsJoNCB0";
+            " https://chat.whatsapp.com/C5yfcxVJjxBDgGpixro9Qb";
         }, 6000);
       } else {
         setMsg(data.message);
