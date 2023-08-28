@@ -4,8 +4,8 @@ const nextConfig = {
     appDir: true,
   },reactStrictMode: true,
   env:{
-    MONGODB_URI : 'mongodb+srv://titidprogrammer:30041987Titile@cluster0.69e5w7x.mongodb.net/?retryWrites=true&w=majority',
-    //'mongodb+srv://titidprogrammer:30041987Titile@cluster0.69e5w7x.mongodb.net/?retryWrites=true&w=majority',
+    MONGODB_URI : 'mongodb+srv://blackwizardstechnology:weareblackwizardstechnology@blackwizardstechnology.acaobdo.mongodb.net/',
+    //'mongodb+srv://blackwizardstechnology:weareblackwizardstechnology@blackwizardstechnology.acaobdo.mongodb.net/',
     //'mongodb://127.0.0.1:27017/bwt',
     BWT_URL: 'https://www.blackwizardstechnology.com/',
     //https://www.blackwizardstechnology.com/',
