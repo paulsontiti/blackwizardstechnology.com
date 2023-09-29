@@ -65,5 +65,5 @@ if(isBodyValid(body)){
 function isBodyValid(body:CourseEpisodeType){
     
 return !body.title || !body.courseTitle || !body.duration || !body.assignment
-|| !Array.isArray(body.downloadablePdf) || !(body.downloadablePdf.length > 0)
+|| !Array.isArray(body.downloadablePdf) || !body.downloadablePdf
 }
