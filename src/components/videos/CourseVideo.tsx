@@ -69,11 +69,11 @@ export default function CourseVideo({
         episodeNumber={episodeNumber}
       />
       <Feedback courseId={courseId as string} episodeNumber={episodeNumber} />
-      <PersonalQuestionsAndAnswers
+      {/* <PersonalQuestionsAndAnswers
         episodeNumber={episodeNumber}
         courseId={courseId as string}
       />{" "}
-      <FAQ courseId={courseId as string} episodeNumber={episodeNumber} />
+      <FAQ courseId={courseId as string} episodeNumber={episodeNumber} /> */}
     </Box>
   );
 }
