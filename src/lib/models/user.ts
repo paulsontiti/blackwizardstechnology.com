@@ -2,35 +2,20 @@ import { Schema, model, models } from "mongoose";
 
 const userSchema = new Schema(
   {
-    fullName:{type: String,
-        required: true,
-        trim: true,
-        lowercase: true,},
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
     userName: {
       type: String,
+      required: true,
       unique: true,
       trim: true,
-      lowercase: true,
     },
     password: {
       type: String,
       required: true,
     },
-    dpFileName: String,
+    referralCode: {
+      type: String,
+      trim: true,
+    },
     active: { type: Boolean, default: true },
   },
   {
@@ -48,5 +33,5 @@ const userSchema = new Schema(
 //         next(error)
 //     }
 // })
-const BWTUser = models.BWTUser || model("BWTUser", userSchema);
-export default BWTUser;
+const User = models.User || model("User", userSchema);
+export default User;
