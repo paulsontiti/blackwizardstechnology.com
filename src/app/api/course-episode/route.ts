@@ -2,7 +2,6 @@
 import dbConnect from '@/lib/types/db'
 import { ApiReturnValue } from '@/lib/types/returnValues'
 import { NextResponse,NextRequest} from 'next/server'
-import ProfileModel from '@/lib/models/profile'
 import { CourseEpisodeType } from '@/lib/types/course'
 import CourseEpisodeModel from '@/lib/models/courseEpisode'
 
@@ -39,6 +38,8 @@ export async function POST(request:NextRequest
   
 if(isBodyValid(body)){
     returnValue.error = 'Invalid course episode details. Please provide the required values'
+    returnValue.ok = false
+    returnValue.value= null
    return new NextResponse(JSON.stringify(returnValue),{status:201})
  
 }else{
@@ -49,9 +50,13 @@ if(isBodyValid(body)){
     
      if(!courseEpisode){
       returnValue.error = 'An Error ocured. Please try again'
+      returnValue.ok = false
+      returnValue.value= null
       return new NextResponse(JSON.stringify(returnValue),{status:201})
      }else{
        returnValue.ok = true
+       returnValue.error = ''
+       returnValue.value= null
         return new NextResponse(JSON.stringify(returnValue),{status:201})
      }
 }
@@ -65,5 +70,5 @@ if(isBodyValid(body)){
 function isBodyValid(body:CourseEpisodeType){
     
 return !body.title || !body.courseTitle || !body.duration || !body.assignment
-|| !Array.isArray(body.downloadablePdf) || !body.downloadablePdf
+ || !body.downloadablePdf
 }
