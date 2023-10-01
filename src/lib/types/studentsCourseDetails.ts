@@ -12,7 +12,11 @@ export type StudentCourseDetailsEpisodeType={
     attempts:number
     episodeNumber:number
     completed:boolean
-    assignment:string 
+    assignment:StudentEpisodeAssignmentType
     score:number 
 
 }
+export type StudentEpisodeAssignmentType={
+    answer:string,
+    grade:number
+} 

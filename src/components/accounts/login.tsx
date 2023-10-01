@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateUser } from "@/store/slices/userSlice";
+import Link from "next/link";
 
 export default function LoginComponent() {
   //app dispatch
@@ -74,6 +75,7 @@ export default function LoginComponent() {
     };
     //send data to backend to register user
     const response: ApiReturnValue = await login.sendData(url, body);
+
     setLoading(false);
     if (response.ok) {
       dispatch(updateUser(response.value));
@@ -95,7 +97,7 @@ export default function LoginComponent() {
   return (
     <Container
       sx={{
-        mt: 20,
+        mt: 10,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -152,12 +154,17 @@ export default function LoginComponent() {
             loadingIndicator={<CircularProgress color="success" />}
             variant="contained"
             onClick={registerHandler}
+            fullWidth
           >
             Login
           </LoadingButton>
-
-          <Button variant="outlined">Reset</Button>
         </CardActions>
+        <Typography mt={2}>
+          <Link href={"/register"}>Register</Link> if you do not have an account
+        </Typography>
+        <Typography mt={2}>
+          <Link href={"/reset-password"}>forgot password?</Link>
+        </Typography>
       </Card>
     </Container>
   );

@@ -269,3 +269,9 @@ export type BlackInputTextFieldProps = {
     phone: string;
     email: string;
   };
+
+  export type ResetPasswordType={
+    userName:string
+    password:string,
+    confirmPassword:string
+  }

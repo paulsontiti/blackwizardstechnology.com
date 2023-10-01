@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import WeekAccordion from "../accordion/WeekAccordion";
 import { Course } from "@/lib/classes/course";
 import { CourseType, StudentCommitedTime } from "@/lib/types/course";
+import HoursSpentDailyRadioButtonsGroup from "../radioButtonGroup/HoursSpentDailyRadioButtonGroup";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,19 +42,19 @@ function a11yProps(index: number) {
   };
 }
 
-export default function CoursesTab({
-  numHours,
-}: {
-  numHours: StudentCommitedTime;
-}) {
+export default function CoursesTab() {
   const [value, setValue] = React.useState(0);
   const [error, setError] = React.useState("");
   const [courses, setCourses] = React.useState<CourseType[] | null>(null);
-
+  const [loading, setLoading] = React.useState(true);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+  const [numHours, setNumHours] = React.useState<StudentCommitedTime>(1);
 
+  const handleChangeNumHours = (value: StudentCommitedTime) => {
+    setNumHours(value);
+  };
   //fetch courses
   React.useEffect(() => {
     (async () => {
@@ -79,6 +80,11 @@ export default function CoursesTab({
 
     return courseObj;
   });
+
+  const handleLoading = (value: boolean) => {
+    setLoading(value);
+  };
+
   return (
     <Box
       sx={{
@@ -107,11 +113,16 @@ export default function CoursesTab({
           ))}
         </Tabs>
       </Box>
+      <HoursSpentDailyRadioButtonsGroup
+        handleTimeChoice={handleChangeNumHours}
+      />
       {coursesArray.map((course, i) => (
         <CustomTabPanel key={course.name} value={value} index={i}>
           {/* iterate all the weeks for the course */}
+          {loading && <p>loading.....</p>}
           {course.noOfWeeksArrary.map((num) => (
             <WeekAccordion
+              loading={handleLoading}
               key={num}
               weekNumber={num}
               noOfVideosPerDay={course.noOfVideosPerDay}

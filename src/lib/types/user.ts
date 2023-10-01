@@ -6,3 +6,4 @@ export type UserType={
     createdAt:Date,
     dpFileName:string
 }
+export type AttemptType= { episodeNumber: number; attempt: number; studentId: string }

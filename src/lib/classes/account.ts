@@ -1,5 +1,4 @@
-import { ApiReturnValue } from "@/lib/types/returnValues";
-import axios from "axios";
+
 import { AccountError } from "../types/account";
 import { BlackError } from "./blackError";
 import { RequestAPIInterface } from "../interfaces/api";
@@ -12,6 +11,9 @@ export abstract class  Account extends BlackError implements RequestAPIInterface
   //fields
   protected _userName: string = "";
   protected _password: string = "";
+  private static  _deactivateUserUrl:string = `${process.env.BWT_URL}api/student/deactivate`
+  private static  _getUsernamesUrl:string = `${process.env.BWT_URL}api/student/usernames`
+  private static  _resetPasswordUrl:string = `${process.env.BWT_URL}api/reset-password`
 
   //get methods
   get userName(): string {
@@ -61,6 +63,9 @@ validatePassword(password:string){
   async getFetchData(url: string, fetchParam: string) {
     return await getFetchRequest(url,fetchParam)
   }
+  static async getUernames() {
+    return await getFetchRequest(Account._getUsernamesUrl,'')
+  }
 
   //fetch data method
   async postFetchData(url: string, body: any) {
@@ -70,5 +75,11 @@ validatePassword(password:string){
   async sendData(url: string, body: any) {
     
    return await sendDataRequest(url,body)
+  }
+  static async deactivateStudent(body: {_id:string}) {
+    return await postFetchRequest(Account._deactivateUserUrl, body)
+  }
+  static async resetPassword(body: {userName:string,password:string}) {
+    return await postFetchRequest(Account._resetPasswordUrl, body)
   }
 }

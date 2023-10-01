@@ -1,6 +1,6 @@
 import { ProfileType } from "../types/forms";
 import { StudentCourseDetailsT } from "../types/studentsCourseDetails";
-import { UserType } from "../types/user";
+import { AttemptType, UserType } from "../types/user";
 
 export const userJSON = () => {
    
@@ -18,6 +18,23 @@ export const userJSON = () => {
     }
     return null;
   };
+  export const attemptsJSON = () => {
+   
+    if (typeof window !== "undefined") {
+      // Perform localStorage action
+      const attemptStr = localStorage.getItem("episodeAttempts");
+      //console.log(userStr)
+      if (attemptStr) {
+        const attempts = JSON.parse(JSON.stringify(attemptStr));
+        if (attempts !== "undefined") {
+          //console.log(user )
+          return JSON.parse(attempts) as AttemptType;
+        }
+      }
+    }
+    return null;
+  };
+
   export const profileJSON = () => {
    
     if (typeof window !== "undefined") {

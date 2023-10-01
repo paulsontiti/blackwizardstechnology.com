@@ -24,6 +24,7 @@ import { AccountError } from "@/lib/types/account";
 import { AppDispatch, RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "@/store/slices/profileSlice";
+import { BlackFormikTextField } from "../form/BlackFormikTextField";
 
 export default function ProfileForm() {
   const { user } = useSelector((state: RootState) => state.users);
@@ -48,7 +49,17 @@ export default function ProfileForm() {
     city: string().required("City is required"),
     state: string().required("State is required"),
     address: string().required("Address is required"),
-    dob: date().required("Date of birth is required"),
+    dob: date()
+      //.min(new Date(), "Date of Birth must be later than today")
+      .max(
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate() - 1
+        ),
+        "Date of Birth must be later than today"
+      )
+      .required("Date of birth is required"),
     sponsorsDetails: object().shape({
       email: string()
         .email("Invalid email address")
@@ -225,7 +236,7 @@ export default function ProfileForm() {
                 <BlackFormikAutocomplete
                   values={values}
                   touched={touched}
-                  label="State"
+                  label="State Of Residence"
                   name="state"
                   required={true}
                   helperText=""
@@ -233,7 +244,7 @@ export default function ProfileForm() {
                 />
                 <BlackFormikTextField
                   name="city"
-                  label="City"
+                  label="City Of Residence"
                   required={true}
                   placeholder="e.g Port Harcourt"
                 />
@@ -300,24 +311,17 @@ export default function ProfileForm() {
                   loading={loading || isSubmitting}
                   disabled={!isValid || isSubmitting || isValidating}
                   type="submit"
-                  sx={{ bgcolor: "red", color: "black", fontWeight: "bold" }}
                   loadingIndicator={<CircularProgress color="success" />}
                   variant="contained"
+                  fullWidth
                   onClick={() => {}}
                 >
                   Add Profile
                 </LoadingButton>
-
-                <Button
-                  variant="outlined"
-                  sx={{ bgcolor: "red", color: "black", fontWeight: "bold" }}
-                >
-                  Reset
-                </Button>
               </CardActions>
 
-              <pre>{JSON.stringify(values, null, 4)}</pre>
-              <pre>{JSON.stringify(errors, null, 4)}</pre>
+              {/* <pre>{JSON.stringify(values, null, 4)}</pre>
+              <pre>{JSON.stringify(errors, null, 4)}</pre> */}
             </Form>
           )}
         </Formik>
@@ -333,63 +337,3 @@ export default function ProfileForm() {
     </Card>
   );
 }
-
-type TextFieldProps = {
-  name: string;
-  label: string;
-  type?: string;
-  required?: boolean;
-  placeholder: string;
-  multiline?: boolean;
-  rows?: number;
-};
-function BlackFormikTextField({
-  name,
-  label,
-  type,
-  required,
-  placeholder,
-  multiline,
-  rows,
-}: TextFieldProps) {
-  return (
-    <Box mb={2}>
-      <Field
-        name={name}
-        as={TextField}
-        label={label}
-        sx={{ width: "100%" }}
-        type={type ?? "input"}
-        required={required}
-        placeholder={placeholder}
-        multiline={multiline}
-        rows={rows}
-      />
-      <Box color={"red"}>
-        <ErrorMessage name={name} />
-      </Box>
-    </Box>
-  );
-}
-
-// type AutocompleteOption = {
-//   id: number;
-//   label: string;
-// };
-// function BlackFormikAutoComplete({
-//   options,name,label
-// }: {
-//   options: AutocompleteOption[],name:string,label:string
-// }) {
-//   return (
-//     <Box mb={2}>
-//       <Field as="select" name={name} style={{ height: 50, width: "100%" }}>
-//         {options.map((option) => (
-//           <option value={option.label} key={option.id}>
-//             {option.label}
-//           </option>
-//         ))}
-//       </Field>
-//     </Box>
-//   );
-// }

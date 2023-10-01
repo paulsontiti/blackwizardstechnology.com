@@ -216,6 +216,10 @@ constructor(){
     
     return await getFetchRequest(Profile._apiUrl,fetchParam)
   }
+  static async getProfile(fetchParam: string) {
+    
+    return await getFetchRequest(Profile._apiUrl,fetchParam)
+  }
 
   //fetch data method
   async postFetchData( body: any) {

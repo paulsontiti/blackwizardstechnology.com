@@ -9,12 +9,14 @@ import {
 } from "@/lib/types/course";
 import AssignmentQuestionOptions from "../radioButtonGroup/AssignmentQuestionOptions";
 import { useEffect, useRef, useState } from "react";
-import { theme } from "@/app/layout";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import { UserType } from "@/lib/types/user";
+import { AttemptType, UserType } from "@/lib/types/user";
 import { updateCourseDetails } from "@/store/slices/courseDetails";
-import { StudentCourseDetailsT } from "@/lib/types/studentsCourseDetails";
+import {
+  StudentCourseDetailsT,
+  StudentEpisodeAssignmentType,
+} from "@/lib/types/studentsCourseDetails";
 import { StudentCourseDetails } from "@/lib/classes/studentCourseDetails";
 import SnackbarComponent from "../snackbar/SnackBar";
 import { BlackAutocompleteFreeSolo } from "../form/BlackAutocompleteFreeSolo";
@@ -22,7 +24,18 @@ import { QuestionOption } from "@/lib/types/forms";
 import { CourseEpisode } from "@/lib/classes/courseEpisode";
 import { downloadFile } from "@/lib/functions/courseVideo";
 import { BlackDivider } from "../drawers/DashboardMenuDrawer";
+import InfoAlert from "../alerts/InfoAlerts";
+import { useRouter } from "next/navigation";
+import ErrorAlert from "../alerts/ErrorAlert";
+import { Account } from "@/lib/classes/account";
+import { updateUser } from "@/store/slices/userSlice";
+import SuccessAlert from "../alerts/SuccessAlert";
+import EpisodeprogressComponent from "../course-details/EpisodeprogressComponent";
+import VideoComponent from "./VideoComponent";
+import { attemptsJSON } from "@/lib/functions/user";
 
+//get attempts for this episode
+const attempts: AttemptType = attemptsJSON() as AttemptType;
 export default function CourseVideo({
   title,
   duration,
@@ -33,18 +46,31 @@ export default function CourseVideo({
   courseId,
   videoSrc,
 }: CourseEpisodeType) {
+  const user = useSelector((state: RootState) => state.users.user);
+  const _id = user && user._id;
+  useEffect(() => {
+    if (attempts && attempts.studentId !== _id) {
+      localStorage.removeItem("episodeAttempts");
+    }
+  }, [_id]);
+  if (user && !user.active)
+    return (
+      <Box minWidth={"100%"} maxWidth={"100%"}>
+        <ErrorAlert message="You are not eligible to continue this course. You failed your last test three times" />
+        <Button variant="contained" sx={{ mt: 2 }} fullWidth>
+          Contact Admin
+        </Button>
+      </Box>
+    );
   return (
-    <Box mb={5}>
+    <Box mb={5} maxWidth={"100%"}>
       <Typography mb={2} fontWeight={"bold"}>
         {`Lesson ${episodeNumber} - ${title} `}
       </Typography>
       <Typography mb={2} fontWeight={"bold"}>
         Duration: - {duration}
       </Typography>
-      <video controls controlsList="nodownload" width={"100%"}>
-        <source src={videoSrc} type="video/mp4" />
-      </video>{" "}
-      <BlackDivider />
+      <VideoComponent src={videoSrc as string} />
       <Typography m={2}>Downloadable Materials</Typography>
       <Button
         sx={{ color: "blue" }}
@@ -73,6 +99,11 @@ export default function CourseVideo({
         episodeNumber={episodeNumber}
         courseId={courseId as string}
       />{" "}
+      <EpisodeprogressComponent
+        courseId={courseId as string}
+        episodeNumber={episodeNumber}
+      />
+      <BlackDivider />
       {/* <FAQ courseId={courseId as string} episodeNumber={episodeNumber} /> */}
     </Box>
   );
@@ -198,8 +229,8 @@ function Feedback({
         disabled={loading}
         variant="contained"
         onClick={async () => {
-          setLoading(true);
           if (feedback) {
+            setLoading(true);
             const response = await CourseEpisode.upDateEpisodeFeedbacks({
               studentId: _id,
               courseId,
@@ -221,12 +252,17 @@ function Feedback({
               const refState = snackBarRef.current as any;
               refState.handleClick();
             }
+          } else {
+            setMsg("Feedback cannot be empty");
+            setColor("error");
+            const refState = snackBarRef.current as any;
+            refState.handleClick();
           }
         }}
         sx={{ mt: 2, mb: 2, maxWidth: "100%" }}
         fullWidth
       >
-        Submit
+        Submit Feedback
       </Button>
     </Box>
   );
@@ -316,7 +352,7 @@ function AskQuestion({
         sx={{ mt: 2, mb: 2, maxWidth: "100%" }}
         fullWidth
       >
-        Submit
+        Submit Question
       </Button>
     </Box>
   );
@@ -334,36 +370,30 @@ function Assignment({
   const { _id } = useSelector(
     (state: RootState) => state.users.user as UserType
   );
-  //get course details
   const courseDetails = useSelector(
-    (state: RootState) =>
-      state.courseDetails.courseDetails as StudentCourseDetailsT
+    (state: RootState) => state.courseDetails.courseDetails
   );
+  const [assignmentAns, setAssignmentAns] =
+    useState<StudentEpisodeAssignmentType>({
+      answer: "",
+      grade: 0,
+    });
 
-  const [studentCourseDetails, setStudentCourseDetails] =
-    useState<StudentCourseDetailsT | null>(courseDetails);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     (async () => {
-      if (!courseDetails) {
-        const data = await StudentCourseDetails.getCourseDetails(_id);
-        if (data.ok) {
-          setStudentCourseDetails(data.value);
-          dispatch(updateCourseDetails(data.value));
-        }
+      const data = await StudentCourseDetails.getStudentEpisodeAssignment({
+        courseId,
+        episodeNumber,
+        studentId: _id,
+      });
+      if (data.ok) {
+        setAssignmentAns(data.value);
       }
     })();
-  }, [_id, dispatch, courseDetails]);
+  }, [_id, courseId, episodeNumber]);
 
-  let assignmentAns = "";
-  if (studentCourseDetails) {
-    //get assignment answer
-    assignmentAns = studentCourseDetails.coursesTaken
-      .find((course) => course.courseId === courseId)
-      ?.episodes.find((ep) => ep.episodeNumber === episodeNumber)
-      ?.assignment as string;
-  }
-  const [answer, setAnswer] = useState(assignmentAns);
+  const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
   //for snackbar
@@ -379,7 +409,39 @@ function Assignment({
       <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
       <BlackDescription label="Assignment" description={assignment} />
       {assignmentAns ? (
-        <BlackDescription label="Your Answer" description={assignmentAns} />
+        <>
+          <BlackDescription
+            label="Your Answer"
+            description={assignmentAns.answer}
+          />
+          {!assignmentAns.grade && (
+            <InfoAlert message="Your assignment grade is on the way" />
+          )}
+          {assignmentAns.grade > 0 && assignmentAns.grade < 50 && (
+            <ErrorAlert
+              message={`Your assignment grade is ${assignmentAns.grade}.
+               This is very poor. You can do better. Study your assignment again`}
+            />
+          )}
+          {assignmentAns.grade > 49 && assignmentAns.grade < 70 && (
+            <InfoAlert
+              message={`Your assignment grade is ${assignmentAns.grade}.
+               Good grade. But you can do better next time.`}
+            />
+          )}
+          {assignmentAns.grade > 69 && assignmentAns.grade < 80 && (
+            <SuccessAlert
+              message={`Your assignment grade is ${assignmentAns.grade}.
+               Great grade. But you can do better next time.`}
+            />
+          )}
+          {assignmentAns.grade > 79 && (
+            <SuccessAlert
+              message={`Your assignment grade is ${assignmentAns.grade}.
+               Excellent grade. You are a computer Wizard.`}
+            />
+          )}
+        </>
       ) : (
         <Box display={"flex"} flexDirection={"column"}>
           <Typography m={2} variant="body2" fontWeight={"bold"}>
@@ -399,6 +461,13 @@ function Assignment({
             disabled={loading}
             variant="contained"
             onClick={async () => {
+              if (!answer) {
+                setMsg("Your ansswer cannot be empty");
+                setColor("error");
+                const refState = snackBarRef.current as any;
+                refState.handleClick();
+                return;
+              }
               setLoading(true);
               if (courseDetails) {
                 const response = await StudentCourseDetails.upDateEpisode({
@@ -438,7 +507,7 @@ function Assignment({
             sx={{ mt: 2, mb: 2, maxWidth: "100%" }}
             fullWidth
           >
-            Submit
+            Submit Assignment
           </Button>
         </Box>
       )}
@@ -462,10 +531,11 @@ function QuickTest({
   courseId: string;
 }) {
   const [start, setStart] = useState(false);
-  const [attempt, setAttempt] = useState(0);
+  const [attempt, setAttempt] = useState(attempts ? attempts.attempt : 0);
   const [questions, setQuestions] = useState<AssignmentQuestion[]>([]);
   const [showAns, setShowAns] = useState(false);
   const [answerObjs, setAnswerObjs] = useState<StudentAnswers[]>([]);
+  const router = useRouter();
   //get student id
   const { _id } = useSelector(
     (state: RootState) => state.users.user as UserType
@@ -482,6 +552,10 @@ function QuickTest({
       }
       case 3: {
         setQuestions(quickTest.questions.slice(20, 30));
+        return;
+      }
+      default: {
+        setQuestions(quickTest.questions.slice(0, 10));
         return;
       }
     }
@@ -507,7 +581,6 @@ function QuickTest({
     (state: RootState) =>
       state.courseDetails.courseDetails as StudentCourseDetailsT
   );
-
   const [studentCourseDetails, setStudentCourseDetails] =
     useState<StudentCourseDetailsT | null>(courseDetails);
   const dispatch = useDispatch<AppDispatch>();
@@ -522,8 +595,7 @@ function QuickTest({
         }
       }
     })();
-  });
-
+  }, [_id, courseDetails, dispatch]);
   let score = 0;
   if (studentCourseDetails) {
     //get score answer
@@ -533,94 +605,112 @@ function QuickTest({
       ?.score as number;
   }
   return (
-    <>
-      {!score && (
-        <Box bgcolor={theme.bwt[200]}>
-          {" "}
-          <BlackDivider />
-          <Box display={"flex"}>
-            <Typography m={2} variant="body2" fontWeight={"bold"}>
-              {`Quick Test - (${quickTest.duration}mins)`}
-            </Typography>
-
-            {!start && (
-              <Button
-                sx={{ fontWeight: "bold" }}
-                color="secondary"
-                onClick={() => {
-                  setStart(true);
-                  setAttempt((prev) => prev + 1);
-                  setShowAns(false);
-                }}
-              >
-                Start
-              </Button>
-            )}
-          </Box>
-          <Typography p={1}>{`Pass mark : ${quickTest.passMark}`}</Typography>
-          <Typography
-            p={1}
-          >{`Repeat times : ${quickTest.repeatableTimes}`}</Typography>
-          <Typography p={1} color={"secondary"} m={2} fontWeight={"bold"}>
-            {attempt > 0 &&
-              attempt <= 3 &&
-              `${quickTest.repeatableTimes - attempt} attempt${
-                quickTest.repeatableTimes - attempt > 1 ? "s" : ""
-              } left`}
-          </Typography>
-          {start && (
-            <Timer duration={quickTest.duration} setShowAns={setShowAns} />
-          )}
-          {start && (
-            <ol>
-              {questions.map((que, i) => (
-                <li key={i}>
-                  <AssignmentQuestionOptions
-                    showAnswer={showAns}
-                    que={que}
-                    handleAnswer={handleAnswer}
-                  />
-                </li>
-              ))}
-            </ol>
-          )}
-          {showAns && start && (
-            <Result
-              answerObjs={answerObjs}
-              episodeNumber={episodeNumber}
-              courseId={courseId}
-              passMark={quickTest.passMark}
-              attempt={attempt}
-              component={
+    <Box maxHeight={"100%"}>
+      <BlackDivider />
+      {score ? (
+        <SuccessAlert message={`Your test score is: ${score}`} />
+      ) : (
+        <>
+          <Box bgcolor={"whitesmoke"}>
+            <InfoAlert
+              message={`You only have ${quickTest.repeatableTimes} attempts for this test. 
+      Ensure you go through the lesson video and material thoroughly. If you fail this test ${quickTest.repeatableTimes} times, you will be out of this course`}
+            />
+            <Box display={"flex"} id="quickTest">
+              <Typography m={2} variant="body2" fontWeight={"bold"}>
+                {`Quick Test - (${quickTest.duration}mins)`}
+              </Typography>
+              {!start && attempt < 3 && (
                 <Button
                   sx={{ fontWeight: "bold" }}
                   color="secondary"
                   onClick={() => {
-                    setStart(false);
-                    setAnswerObjs([]);
+                    setStart(true);
+                    setAttempt((prev) => prev + 1);
+                    setShowAns(false);
+                    //update the attemp of this episode
+                    //get the current episode
+                    const episodeAttempts = {
+                      episodeNumber,
+                      attempt: attempt + 1,
+                      studentId: _id,
+                    };
+                    localStorage.setItem(
+                      "episodeAttempts",
+                      JSON.stringify(episodeAttempts)
+                    );
                   }}
                 >
                   Start
                 </Button>
-              }
-            />
-          )}
-          {start && (
-            <Button
-              disabled={showAns}
-              fullWidth
-              sx={{ m: 2, maxWidth: "80%" }}
-              variant="contained"
-              onClick={() => {
-                setShowAns(true);
-              }}
-            >
-              Submit Your Answers
-            </Button>
-          )}
-        </Box>
+              )}
+            </Box>
+            <Typography p={1}>{`Pass mark : ${quickTest.passMark}`}</Typography>
+            <Typography
+              p={1}
+            >{`Repeat times : ${quickTest.repeatableTimes}`}</Typography>
+            <Typography p={1} color={"secondary"} m={1} fontWeight={"bold"}>
+              {attempt > 0 &&
+                attempt <= 3 &&
+                `${quickTest.repeatableTimes - attempt} attempt${
+                  quickTest.repeatableTimes - attempt > 1 ? "s" : ""
+                } left`}
+            </Typography>
+            {start && (
+              <Timer duration={quickTest.duration} setShowAns={setShowAns} />
+            )}
+            {start && (
+              <ol>
+                {questions.map((que, i) => (
+                  <li key={i}>
+                    <AssignmentQuestionOptions
+                      showAnswer={showAns}
+                      que={que}
+                      handleAnswer={handleAnswer}
+                    />
+                  </li>
+                ))}
+              </ol>
+            )}
+            {showAns && start && (
+              <Result
+                answerObjs={answerObjs}
+                episodeNumber={episodeNumber}
+                courseId={courseId}
+                passMark={quickTest.passMark}
+                attempt={attempt}
+                component={
+                  <Button
+                    sx={{ fontWeight: "bold" }}
+                    color="secondary"
+                    onClick={() => {
+                      setStart(false);
+                      setAnswerObjs([]);
+                      router.push("/dashboard/course-details/#quickTest");
+                    }}
+                  >
+                    Try again
+                  </Button>
+                }
+              />
+            )}
+            {start && (
+              <Button
+                disabled={showAns}
+                fullWidth
+                sx={{ m: 2, maxWidth: "80%" }}
+                variant="contained"
+                onClick={() => {
+                  setShowAns(true);
+                }}
+              >
+                Submit Your Answers
+              </Button>
+            )}
+          </Box>
+        </>
       )}
-    </>
+    </Box>
   );
 }
 function Result({
@@ -649,14 +739,6 @@ function Result({
   const dispatch = useDispatch<AppDispatch>();
 
   const score = () => {
-    //update the attemp of this episode
-    //get the current episode
-    const episodeAttempts = {
-      episodeNumber,
-      attempt,
-    };
-    localStorage.setItem("episodeAttempts", JSON.stringify(episodeAttempts));
-
     //score the test
     let score = 0;
     for (let obj of answerObjs) {
@@ -689,6 +771,16 @@ function Result({
           dispatch(updateCourseDetails(response.value));
         }
       })();
+    } else {
+      if (attempt === 3) {
+        (async () => {
+          const response = await Account.deactivateStudent({ _id });
+          if (response.ok) {
+            dispatch(updateUser(response.value));
+            localStorage.removeItem("episodeAttempts");
+          }
+        })();
+      }
     }
     return score;
   };

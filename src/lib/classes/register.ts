@@ -46,6 +46,17 @@ export class Register extends Account {
       { label: "Youtube" },
       { label: "Instagram" },
     ];
+    let userNames
+    (
+      async()=>{
+        const response = await Account.getUernames()
+        if(response && response.ok && Array.isArray(response.value)){
+          response.value.map((value:{userName:string})=>{
+            options.push({label:value.userName})
+          })
+        }
+      }
+    )()
     return options;
   }
   

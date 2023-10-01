@@ -9,6 +9,7 @@ export class StudentCourseDetails implements RequestAPIInterface{
     private _coursesTaken:StudentCourseDetailsType[] = []
     private static  _apiUrl = `${process.env.BWT_URL}api/student-course-details`
     private static  _updateEpisodeApiUrl = `${process.env.BWT_URL}api/student-course-details/update-episode`
+    private static  _studentEpisodeAssignmentUrl = `${process.env.BWT_URL}api/student-course-details/episode-assignment`
 
 
     //get methods
@@ -49,4 +50,9 @@ export class StudentCourseDetails implements RequestAPIInterface{
     
     return await getFetchRequest(StudentCourseDetails._apiUrl,fetchParam)
    }
+   static async getStudentEpisodeAssignment(body:StudentEpisodeAssignmentPostRequestBody) {
+    
+    return await postFetchRequest(StudentCourseDetails._studentEpisodeAssignmentUrl,body)
+   }
 }
+export type StudentEpisodeAssignmentPostRequestBody={studentId:string,courseId:string,episodeNumber:number}

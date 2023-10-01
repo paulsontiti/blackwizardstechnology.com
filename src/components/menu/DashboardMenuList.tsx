@@ -13,11 +13,12 @@ import WalletIcon from "@mui/icons-material/Wallet";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ForumIcon from "@mui/icons-material/Forum";
 import { useRouter } from "next/navigation";
-import { ListItemButton } from "@mui/material";
+import { ListItemButton, Typography } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { theme } from "@/app/layout";
 
 export default function DashboardMenuList() {
+  const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   return (
     <MenuList
@@ -31,13 +32,16 @@ export default function DashboardMenuList() {
       <MenuItem>
         <ListItemButton
           onClick={() => {
+            setLoading(true);
             router.push("/dashboard");
           }}
         >
           <ListItemIcon>
             <DashboardIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText>Dashboard</ListItemText>
+          <ListItemText>
+            <Typography>Dashboard</Typography>
+          </ListItemText>
         </ListItemButton>
       </MenuItem>{" "}
       <BlackDivider />{" "}

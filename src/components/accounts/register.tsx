@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateUser } from "@/store/slices/userSlice";
+import Link from "next/link";
 
 export default function RegisterComponent() {
   const dispatch = useDispatch<AppDispatch>();
@@ -105,7 +106,7 @@ export default function RegisterComponent() {
   return (
     <Container
       sx={{
-        mt: 20,
+        mt: 10,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -159,7 +160,7 @@ export default function RegisterComponent() {
         />
         <BlackPasswordField
           label="Confirm Password"
-          helperText="Ensure this matches with your passwird"
+          helperText="Ensure this matches with your password"
           errorMessage={confirmPasswordErrorMessage}
           onChange={(value: string) => {
             setConfirmPassword(value);
@@ -176,9 +177,9 @@ export default function RegisterComponent() {
         />
         <BlackAutocomplete
           options={register.referralOptions}
-          label="What is your question"
-          placeholder="select options that match your question"
-          helperText="Select option that match your question"
+          label="Type to search for usernames and social media handles"
+          placeholder=""
+          helperText="How did you know about us?"
           onChange={(value: Option | null) => {
             if (value) {
               setReferralCode(value.label);
@@ -196,9 +197,10 @@ export default function RegisterComponent() {
           >
             Register
           </LoadingButton>
-
-          <Button variant="outlined">Reset</Button>
         </CardActions>
+        <Typography mt={2}>
+          <Link href={"/login"}>Login</Link> if you already have an account
+        </Typography>
       </Card>
     </Container>
   );

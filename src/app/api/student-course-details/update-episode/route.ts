@@ -51,7 +51,13 @@ if(isBodyInValid(body)){
     (course:StudentCourseDetailsType)=>course.courseId.toString() === courseId)?.episodes.find(
         (ep:StudentCourseDetailsEpisodeType)=>ep.episodeNumber === episodeNumber)
         //update episode
-        episode[updateParam] = value
+        if(updateParam === 'assignment'){
+          const assignment = {answer:value}
+          episode[updateParam] = assignment
+        }else{
+          episode[updateParam] = value
+        }
+       
         //add episode to course
 
        courseDetails.coursesTaken.find((course:StudentCourseDetailsType)=>course.courseId.toString() === courseId)?.episodes.filter(

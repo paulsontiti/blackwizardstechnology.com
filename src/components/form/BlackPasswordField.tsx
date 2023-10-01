@@ -1,7 +1,10 @@
 "use client";
 import { BlackInputTextFieldProps } from "@/lib/types/forms";
-import { Box, TextField } from "@mui/material";
+import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export default function BlackPasswordField({
   label,
   onChange,
@@ -13,11 +16,22 @@ export default function BlackPasswordField({
   useEffect(() => {
     setError(errorMessage ? true : false);
   }, [errorMessage]);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [inputType, setInputType] = useState("password");
+  const handleClickShowPassword = () => {
+    setHidePassword((hide) => !hide);
 
+    hidePassword ? setInputType("text") : setInputType("password");
+  };
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
   return (
     <Box mb={2}>
       <TextField
-        type="password"
+        type={inputType}
         fullWidth
         label={label}
         error={error}
@@ -27,6 +41,20 @@ export default function BlackPasswordField({
         }}
         onBlur={onBlur}
         helperText={errorMessage ? errorMessage : helperText}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {hidePassword ? <VisibilityIcon /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
     </Box>
   );

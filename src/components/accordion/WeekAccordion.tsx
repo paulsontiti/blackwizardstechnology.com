@@ -13,10 +13,11 @@ import { CourseEpisodeType } from "@/lib/types/course";
 export default function WeekAccordion({
   weekNumber,
   noOfVideosPerDay,
-  courseName,
   courseId,
+  loading,
 }: {
   noOfVideosPerDay: number;
+  loading: (value: boolean) => void;
   courseId: string;
   weekNumber: number;
   courseName: string;
@@ -33,8 +34,9 @@ export default function WeekAccordion({
       } else {
         setError(data.error);
       }
+      loading(false);
     })();
-  }, [courseId]);
+  }, [courseId, loading]);
   if (!episodes) return <p></p>;
   if (error) return <p></p>;
 
