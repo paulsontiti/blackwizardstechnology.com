@@ -42,22 +42,22 @@ export default function HoursSpentDailyRadioButtonsGroup({
         <FormControlLabel
           value="1"
           control={<Radio size="small" />}
-          label="1 hour - 2 yrs - ₦30,000/month"
+          label="1 hour - ₦30,000/month"
         />
         <FormControlLabel
           value="2"
           control={<Radio size="small" />}
-          label="2 hours - 1.5 yrs - ₦50,000/month"
+          label="2 hours - ₦50,000/month"
         />
         <FormControlLabel
           value="4"
           control={<Radio size="small" />}
-          label="4 hours - 1 yr - ₦80,000/month"
+          label="4 hours - ₦80,000/month"
         />
         <FormControlLabel
           value="8"
           control={<Radio size="small" />}
-          label="8 hours - 1/2 yr - ₦100,000/month"
+          label="8 hours - ₦100,000/month"
         />
       </RadioGroup>
       {/* <Button variant="contained">Submit</Button> */}
