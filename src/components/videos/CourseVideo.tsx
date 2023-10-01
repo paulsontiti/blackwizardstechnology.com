@@ -410,11 +410,13 @@ function Assignment({
       <BlackDescription label="Assignment" description={assignment} />
       {assignmentAns ? (
         <>
-          <BlackDescription
-            label="Your Answer"
-            description={assignmentAns.answer}
-          />
-          {!assignmentAns.grade && (
+          {assignmentAns.answer && (
+            <BlackDescription
+              label="Your Answer"
+              description={assignmentAns.answer}
+            />
+          )}
+          {assignmentAns.answer && !assignmentAns.grade && (
             <InfoAlert message="Your assignment grade is on the way" />
           )}
           {assignmentAns.grade > 0 && assignmentAns.grade < 50 && (

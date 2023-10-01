@@ -45,6 +45,22 @@ export default function DashboardComponent() {
           No Profile found
         </Typography>
         <Link href={"/dashboard/profile"}>Add Profile</Link>
+        <VideoComponent
+          src="/assets/11-year-old.mp4"
+          title="11-Year Old Nigerian Simplifies Coding"
+        />
+
+        <VideoComponent
+          src="/assets/coding-class.mp4"
+          title=" 15-year-old starts online computer coding classes for kids of color"
+        />
+
+        <VideoComponent
+          src="/assets/african-teenager.mp4"
+          title="Is this African teenager a future coding superstar_ - BBC News"
+        />
+
+        <CourseDetailsProgress />
       </Box>
     );
   return (
