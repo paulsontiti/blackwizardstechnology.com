@@ -56,7 +56,7 @@ export default function DashboardComponent() {
   if (studentProfile === undefined) return <InfoAlert message="loading..." />;
   if (studentProfile === null)
     return (
-      <Box>
+      <Box minWidth={"100%"} maxWidth={"100%"}>
         <Typography mb={2} variant="body2">
           {" "}
           No Profile found
