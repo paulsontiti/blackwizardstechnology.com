@@ -1,5 +1,12 @@
 "use client";
-import { Box, CardHeader, Typography, Skeleton, Avatar } from "@mui/material";
+import {
+  Box,
+  CardHeader,
+  Typography,
+  Skeleton,
+  Avatar,
+  Button,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { BlackDescription } from "../styledComponents/BlackDescription";
@@ -54,7 +61,15 @@ export default function DashboardComponent() {
           {" "}
           No Profile found
         </Typography>
-        <Link href={"/dashboard/profile"}>Add Profile</Link>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            router.push("/dashboard/profile");
+          }}
+        >
+          Add Profile
+        </Button>
+
         <VideoComponent
           src="/assets/11-year-old.mp4"
           title="11-Year Old Nigerian Simplifies Coding"
