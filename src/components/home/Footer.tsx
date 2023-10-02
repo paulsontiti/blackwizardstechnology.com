@@ -107,7 +107,7 @@ function Footer() {
                 Email:
               </Typography>
               <Typography sx={{ color: "black", mb: 0.5 }}>
-                info@blackwizardstechnology.com
+                blackwizardstechnology@gmail.com
               </Typography>
               <Typography
                 variant="body1"
@@ -116,7 +116,7 @@ function Footer() {
                 Phone:
               </Typography>
               <Typography sx={{ color: "black", mb: 0.5 }}>
-                09127845769
+                09167704504
               </Typography>
             </CardContent>
           </Card>
