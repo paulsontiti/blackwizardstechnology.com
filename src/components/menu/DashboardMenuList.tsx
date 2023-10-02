@@ -140,17 +140,20 @@ export function BlackDivider() {
 export function DashboardListItemButton() {
   const router = useRouter();
   return (
-    <ListItemButton
-      onClick={() => {
-        router.push("/dashboard");
-      }}
-    >
-      <ListItemIcon>
-        <DashboardIcon color="secondary" />
-      </ListItemIcon>
-      <ListItemText>
-        <Typography>Dashboard</Typography>
-      </ListItemText>
-    </ListItemButton>
+    <>
+      <ListItemButton
+        onClick={() => {
+          router.push("/dashboard");
+        }}
+      >
+        <ListItemIcon>
+          <DashboardIcon color="secondary" />
+        </ListItemIcon>
+        <ListItemText>
+          <Typography>Dashboard</Typography>
+        </ListItemText>
+      </ListItemButton>
+      <BlackDivider />
+    </>
   );
 }
