@@ -63,11 +63,11 @@ export default function CourseVideo({
           <Typography fontWeight={"bold"} variant="body2" m={2}>
             Contact your instructor
           </Typography>
-          <Box display={"flex"}>
+          <Box display={"flex"} alignItems={"center"}>
             <CallIcon />
             <Typography m={2}>09167704504</Typography>
           </Box>
-          <Box display={"flex"}>
+          <Box display={"flex"} alignItems={"center"}>
             <WhatsAppIcon />
             <Typography m={2}>09167704504</Typography>
           </Box>
