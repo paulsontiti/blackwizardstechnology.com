@@ -420,7 +420,7 @@ function Assignment({
       <BlackDivider />
       <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
       <BlackDescription label="Assignment" description={assignment} />
-      {assignmentAns ? (
+      {assignmentAns.answer ? (
         <>
           {assignmentAns.answer && (
             <BlackDescription
