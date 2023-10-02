@@ -31,6 +31,7 @@ import { logout } from "@/store/slices/userSlice";
 import { deleteProfile } from "@/store/slices/profileSlice";
 import { deleteCourseDetails } from "@/store/slices/courseDetails";
 import HomeIcon from "@mui/icons-material/Home";
+import { DashboardListItemButton } from "../menu/DashboardMenuList";
 export default function DashboardmenuDrawer() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -75,19 +76,9 @@ export default function DashboardmenuDrawer() {
                 </ListItemText>
               </ListItemButton>
             </MenuItem>{" "}
+            <BlackDivider />{" "}
             <MenuItem>
-              <ListItemButton
-                onClick={() => {
-                  setOpen(false);
-
-                  router.push("/dashboard");
-                }}
-              >
-                <ListItemIcon>
-                  <DashboardIcon color="secondary" />
-                </ListItemIcon>
-                <ListItemText>Dashboard</ListItemText>
-              </ListItemButton>
+              <DashboardListItemButton />
             </MenuItem>{" "}
             <BlackDivider />{" "}
             <MenuItem>
