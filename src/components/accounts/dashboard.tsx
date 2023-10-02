@@ -56,7 +56,10 @@ export default function DashboardComponent() {
   if (studentProfile === undefined) return <InfoAlert message="loading..." />;
   if (studentProfile === null)
     return (
-      <Box minWidth={"100%"} maxWidth={"100%"}>
+      <Box
+        minWidth={{ xs: "100%", md: "80%" }}
+        maxWidth={{ xs: "100%", md: "80%" }}
+      >
         <Typography mb={2} variant="body2">
           {" "}
           No Profile found
@@ -89,7 +92,10 @@ export default function DashboardComponent() {
       </Box>
     );
   return (
-    <Box minWidth={"100%"} maxWidth={"100%"}>
+    <Box
+      minWidth={{ xs: "100%", md: "80%" }}
+      maxWidth={{ xs: "100%", md: "80%" }}
+    >
       <CardHeader
         sx={{ minWidth: "100%" }}
         avatar={<Avatar />}
