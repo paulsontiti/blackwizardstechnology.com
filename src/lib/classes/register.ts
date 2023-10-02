@@ -50,7 +50,6 @@ export class Register extends Account {
     (
       async()=>{
         const response = await Account.getUernames()
-        console.log(response.value)
         if(response && response.ok && Array.isArray(response.value) && response.value.length){
           response.value.map((value:{userName:string})=>{
             options.push({label:value.userName})
