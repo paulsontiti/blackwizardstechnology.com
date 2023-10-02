@@ -33,6 +33,8 @@ import SuccessAlert from "../alerts/SuccessAlert";
 import EpisodeprogressComponent from "../course-details/EpisodeprogressComponent";
 import VideoComponent from "./VideoComponent";
 import { attemptsJSON } from "@/lib/functions/user";
+import CallIcon from "@mui/icons-material/Call";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 //get attempts for this episode
 const attempts: AttemptType = attemptsJSON() as AttemptType;
@@ -57,9 +59,19 @@ export default function CourseVideo({
     return (
       <Box minWidth={"100%"} maxWidth={"100%"}>
         <ErrorAlert message="You are not eligible to continue this course. You failed your last test three times" />
-        <Button variant="contained" sx={{ mt: 2 }} fullWidth>
-          Contact Admin
-        </Button>
+        <Box bgcolor={"whitesmoke"}>
+          <Typography fontWeight={"bold"} variant="body2" m={2}>
+            Contact your instructor
+          </Typography>
+          <Box display={"flex"}>
+            <CallIcon />
+            <Typography m={2}>09167704504</Typography>
+          </Box>
+          <Box display={"flex"}>
+            <WhatsAppIcon />
+            <Typography m={2}>09167704504</Typography>
+          </Box>
+        </Box>
       </Box>
     );
   return (
