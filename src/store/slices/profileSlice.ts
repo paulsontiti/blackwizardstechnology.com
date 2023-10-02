@@ -19,12 +19,16 @@ const profileSlice = createSlice({
       state.profile = action.payload;
       localStorage.setItem('profile',JSON.stringify(state.profile))
     },
+    deleteProfile: (state) => {
+      state.profile = null;
+      localStorage.removeItem('profile')
+    },
   },
   extraReducers: (builder) => {
     
   },
 });
 
-export const { updateProfile } = profileSlice.actions;
+export const { updateProfile,deleteProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

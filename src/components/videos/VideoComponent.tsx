@@ -10,9 +10,11 @@ export default function VideoComponent({
 }) {
   return (
     <>
-      <Typography fontWeight={"bold"} mt={5} mb={2}>
-        {title}
-      </Typography>
+      {title && (
+        <Typography fontWeight={"bold"} mt={5} mb={2}>
+          {title}
+        </Typography>
+      )}
       <video controls controlsList="nodownload" width={"100%"}>
         <source src={src} type="video/mp4" />
       </video>{" "}

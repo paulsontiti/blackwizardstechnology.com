@@ -10,15 +10,15 @@ import InfoIcon from "@mui/icons-material/Info";
 import SchoolIcon from "@mui/icons-material/School";
 import Diversity1Icon from "@mui/icons-material/Diversity1";
 import WalletIcon from "@mui/icons-material/Wallet";
-import LogoutIcon from "@mui/icons-material/Logout";
 import ForumIcon from "@mui/icons-material/Forum";
 import { useRouter } from "next/navigation";
 import { ListItemButton, Typography } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { theme } from "@/app/layout";
+import { MenuListLogout } from "../drawers/DashboardMenuDrawer";
+import HomeIcon from "@mui/icons-material/Home";
 
 export default function DashboardMenuList() {
-  const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   return (
     <MenuList
@@ -32,7 +32,21 @@ export default function DashboardMenuList() {
       <MenuItem>
         <ListItemButton
           onClick={() => {
-            setLoading(true);
+            router.push("/");
+          }}
+        >
+          <ListItemIcon>
+            <HomeIcon color="secondary" />
+          </ListItemIcon>
+          <ListItemText>
+            <Typography>Home</Typography>
+          </ListItemText>
+        </ListItemButton>
+      </MenuItem>{" "}
+      <BlackDivider />{" "}
+      <MenuItem>
+        <ListItemButton
+          onClick={() => {
             router.push("/dashboard");
           }}
         >
@@ -124,12 +138,7 @@ export default function DashboardMenuList() {
       </MenuItem>
       <BlackDivider />
       <MenuItem>
-        <ListItemButton onClick={() => {}}>
-          <ListItemIcon>
-            <LogoutIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText>Logout</ListItemText>
-        </ListItemButton>
+        <MenuListLogout />
       </MenuItem>
     </MenuList>
   );

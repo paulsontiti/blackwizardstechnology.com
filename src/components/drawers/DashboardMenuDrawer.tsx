@@ -9,6 +9,7 @@ import {
   ListItemText,
   MenuItem,
   MenuList,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "@/components/home/Logo";
@@ -27,10 +28,13 @@ import { theme } from "@/app/layout";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { logout } from "@/store/slices/userSlice";
+import { deleteProfile } from "@/store/slices/profileSlice";
+import { deleteCourseDetails } from "@/store/slices/courseDetails";
+import HomeIcon from "@mui/icons-material/Home";
 export default function DashboardmenuDrawer() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
+
   return (
     <Box display={"flex"} alignItems={"center"} justifyContent={"flex-start"}>
       <Box display={{ xs: "block", md: "none" }}>
@@ -56,6 +60,21 @@ export default function DashboardmenuDrawer() {
               color: "black",
             }}
           >
+            {" "}
+            <MenuItem>
+              <ListItemButton
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                <ListItemIcon>
+                  <HomeIcon color="secondary" />
+                </ListItemIcon>
+                <ListItemText>
+                  <Typography>Home</Typography>
+                </ListItemText>
+              </ListItemButton>
+            </MenuItem>{" "}
             <MenuItem>
               <ListItemButton
                 onClick={() => {
@@ -162,18 +181,7 @@ export default function DashboardmenuDrawer() {
             </MenuItem>
             <BlackDivider />
             <MenuItem>
-              <ListItemButton
-                onClick={() => {
-                  dispatch(logout());
-                  setOpen(false);
-                  router.push("/login");
-                }}
-              >
-                <ListItemIcon>
-                  <LogoutIcon color="secondary" />
-                </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-              </ListItemButton>
+              <MenuListLogout />
             </MenuItem>
           </MenuList>
         </Drawer>
@@ -184,4 +192,23 @@ export default function DashboardmenuDrawer() {
 }
 export function BlackDivider() {
   return <Divider color={theme.bwt[500]} sx={{ mt: 2, mb: 2 }} />;
+}
+export function MenuListLogout() {
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  return (
+    <ListItemButton
+      onClick={() => {
+        dispatch(logout());
+        dispatch(deleteProfile());
+        dispatch(deleteCourseDetails());
+        router.push("/");
+      }}
+    >
+      <ListItemIcon>
+        <LogoutIcon color="secondary" />
+      </ListItemIcon>
+      <ListItemText>Logout</ListItemText>
+    </ListItemButton>
+  );
 }

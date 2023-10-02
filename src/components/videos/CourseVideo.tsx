@@ -155,19 +155,19 @@ function PersonalQuestionsAndAnswers({
 }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   useEffect(() => {
     (async () => {
-      const response = await CourseEpisode.getEpisodeArrayPropByStudent({
-        studentId: _id,
-        courseId,
-        episodeNumber,
-        prop: "studentsPersonalQuestions",
-      });
-      if (response.ok) {
-        setQuestions(response.value);
+      if (_id) {
+        const response = await CourseEpisode.getEpisodeArrayPropByStudent({
+          studentId: _id,
+          courseId,
+          episodeNumber,
+          prop: "studentsPersonalQuestions",
+        });
+        if (response.ok) {
+          setQuestions(response.value);
+        }
       }
     })();
   }, [_id, courseId, episodeNumber]);
@@ -196,9 +196,7 @@ function Feedback({
   episodeNumber: number;
 }) {
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
   //for snackbar
@@ -231,26 +229,28 @@ function Feedback({
         onClick={async () => {
           if (feedback) {
             setLoading(true);
-            const response = await CourseEpisode.upDateEpisodeFeedbacks({
-              studentId: _id,
-              courseId,
-              episodeNumber,
-              value: feedback,
-            });
-            setLoading(false);
-            setFeedback("");
-            if (response.ok) {
-              setMsg(
-                "Your feedback was successfully submitted. Thanks for sharing your thoughts"
-              );
-              setColor("success");
-              const refState = snackBarRef.current as any;
-              refState.handleClick();
-            } else {
-              setMsg(response.error);
-              setColor("error");
-              const refState = snackBarRef.current as any;
-              refState.handleClick();
+            if (_id) {
+              const response = await CourseEpisode.upDateEpisodeFeedbacks({
+                studentId: _id,
+                courseId,
+                episodeNumber,
+                value: feedback,
+              });
+              setLoading(false);
+              setFeedback("");
+              if (response.ok) {
+                setMsg(
+                  "Your feedback was successfully submitted. Thanks for sharing your thoughts"
+                );
+                setColor("success");
+                const refState = snackBarRef.current as any;
+                refState.handleClick();
+              } else {
+                setMsg(response.error);
+                setColor("error");
+                const refState = snackBarRef.current as any;
+                refState.handleClick();
+              }
             }
           } else {
             setMsg("Feedback cannot be empty");
@@ -276,9 +276,7 @@ function AskQuestion({
   episodeNumber: number;
 }) {
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   const [options, setOptions] = useState<QuestionOption[]>([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
@@ -321,24 +319,26 @@ function AskQuestion({
         onClick={async () => {
           if (question) {
             setLoading(true);
-            const response = await CourseEpisode.upDateEpisodeQuestions({
-              courseId,
-              episodeNumber,
-              value: question,
-              studentId: _id,
-            });
-            setLoading(false);
-            setQuestion("");
-            if (response.ok) {
-              setMsg("Your question was successfully submitted");
-              setColor("success");
-              const refState = snackBarRef.current as any;
-              refState.handleClick();
-            } else {
-              setMsg(response.error);
-              setColor("error");
-              const refState = snackBarRef.current as any;
-              refState.handleClick();
+            if (_id) {
+              const response = await CourseEpisode.upDateEpisodeQuestions({
+                courseId,
+                episodeNumber,
+                value: question,
+                studentId: _id,
+              });
+              setLoading(false);
+              setQuestion("");
+              if (response.ok) {
+                setMsg("Your question was successfully submitted");
+                setColor("success");
+                const refState = snackBarRef.current as any;
+                refState.handleClick();
+              } else {
+                setMsg(response.error);
+                setColor("error");
+                const refState = snackBarRef.current as any;
+                refState.handleClick();
+              }
             }
           } else {
             setMsg(
@@ -367,9 +367,7 @@ function Assignment({
   episodeNumber: number;
 }) {
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   const courseDetails = useSelector(
     (state: RootState) => state.courseDetails.courseDetails
   );
@@ -382,13 +380,15 @@ function Assignment({
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     (async () => {
-      const data = await StudentCourseDetails.getStudentEpisodeAssignment({
-        courseId,
-        episodeNumber,
-        studentId: _id,
-      });
-      if (data.ok) {
-        setAssignmentAns(data.value);
+      if (_id) {
+        const data = await StudentCourseDetails.getStudentEpisodeAssignment({
+          courseId,
+          episodeNumber,
+          studentId: _id,
+        });
+        if (data.ok) {
+          setAssignmentAns(data.value);
+        }
       }
     })();
   }, [_id, courseId, episodeNumber]);
@@ -472,38 +472,42 @@ function Assignment({
               }
               setLoading(true);
               if (courseDetails) {
-                const response = await StudentCourseDetails.upDateEpisode({
-                  studentId: _id,
-                  courseId,
-                  episodeNumber,
-                  updateParam: "assignment",
-                  value: answer,
-                });
-                if (response.ok) {
-                  setLoading(false);
-                  setMsg("Your assignment was successfully submitted");
-                  setColor("success");
-                  const refState = snackBarRef.current as any;
-                  refState.handleClick();
-                } else {
-                  setLoading(false);
-                  setMsg(response.error);
-                  setColor("error");
-                  const refState = snackBarRef.current as any;
-                  refState.handleClick();
+                if (_id) {
+                  const response = await StudentCourseDetails.upDateEpisode({
+                    studentId: _id,
+                    courseId,
+                    episodeNumber,
+                    updateParam: "assignment",
+                    value: answer,
+                  });
+                  if (response.ok) {
+                    setLoading(false);
+                    setMsg("Your assignment was successfully submitted");
+                    setColor("success");
+                    const refState = snackBarRef.current as any;
+                    refState.handleClick();
+                  } else {
+                    setLoading(false);
+                    setMsg(response.error);
+                    setColor("error");
+                    const refState = snackBarRef.current as any;
+                    refState.handleClick();
+                  }
+                  dispatch(updateCourseDetails(response.value));
                 }
-                dispatch(updateCourseDetails(response.value));
               } else {
                 const studentCourseDetails = new StudentCourseDetails();
-                const response = await studentCourseDetails.sendData({
-                  studentId: _id,
-                  courseId,
-                  episode: {
-                    episodeNumber,
-                    assignmentAns,
-                  },
-                });
-                dispatch(updateCourseDetails(response.value));
+                if (_id) {
+                  const response = await studentCourseDetails.sendData({
+                    studentId: _id,
+                    courseId,
+                    episode: {
+                      episodeNumber,
+                      assignmentAns,
+                    },
+                  });
+                  dispatch(updateCourseDetails(response.value));
+                }
               }
             }}
             sx={{ mt: 2, mb: 2, maxWidth: "100%" }}
@@ -539,9 +543,7 @@ function QuickTest({
   const [answerObjs, setAnswerObjs] = useState<StudentAnswers[]>([]);
   const router = useRouter();
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   useEffect(() => {
     switch (attempt) {
       case 1: {
@@ -590,10 +592,12 @@ function QuickTest({
   useEffect(() => {
     (async () => {
       if (!courseDetails) {
-        const data = await StudentCourseDetails.getCourseDetails(_id);
-        if (data.ok) {
-          setStudentCourseDetails(data.value);
-          dispatch(updateCourseDetails(data.value));
+        if (_id) {
+          const data = await StudentCourseDetails.getCourseDetails(_id);
+          if (data.ok) {
+            setStudentCourseDetails(data.value);
+            dispatch(updateCourseDetails(data.value));
+          }
         }
       }
     })();
@@ -630,6 +634,7 @@ function QuickTest({
                     setStart(true);
                     setAttempt((prev) => prev + 1);
                     setShowAns(false);
+
                     //update the attemp of this episode
                     //get the current episode
                     const episodeAttempts = {
@@ -731,9 +736,7 @@ function Result({
   attempt: number;
 }) {
   //get student id
-  const { _id } = useSelector(
-    (state: RootState) => state.users.user as UserType
-  );
+  const _id = useSelector((state: RootState) => state.users.user?._id);
   const courseDetails = useSelector(
     (state: RootState) =>
       state.courseDetails.courseDetails as StudentCourseDetailsT
@@ -751,35 +754,42 @@ function Result({
     if (score >= passMark) {
       (async () => {
         if (courseDetails) {
-          const response = await StudentCourseDetails.upDateEpisode({
-            studentId: _id,
-            courseId,
-            episodeNumber,
-            updateParam: "score",
-            value: score,
-          });
+          if (_id) {
+            const response = await StudentCourseDetails.upDateEpisode({
+              studentId: _id,
+              courseId,
+              episodeNumber,
+              updateParam: "score",
+              value: score,
+            });
 
-          dispatch(updateCourseDetails(response.value));
+            dispatch(updateCourseDetails(response.value));
+          }
         } else {
           const studentCourseDetails = new StudentCourseDetails();
-          const response = await studentCourseDetails.sendData({
-            studentId: _id,
-            courseId,
-            episode: {
-              episodeNumber,
-              score,
-            },
-          });
-          dispatch(updateCourseDetails(response.value));
+          if (_id) {
+            const response = await studentCourseDetails.sendData({
+              studentId: _id,
+              courseId,
+              episode: {
+                episodeNumber,
+                score,
+              },
+            });
+            dispatch(updateCourseDetails(response.value));
+            localStorage.removeItem("episodeAttempts");
+          }
         }
       })();
     } else {
       if (attempt === 3) {
         (async () => {
-          const response = await Account.deactivateStudent({ _id });
-          if (response.ok) {
-            dispatch(updateUser(response.value));
-            localStorage.removeItem("episodeAttempts");
+          if (_id) {
+            const response = await Account.deactivateStudent({ _id });
+            if (response.ok) {
+              dispatch(updateUser(response.value));
+              localStorage.removeItem("episodeAttempts");
+            }
           }
         })();
       }

@@ -1,4 +1,5 @@
 "use client";
+
 import { store } from "@/store";
 import { ThemeProvider, createTheme } from "@mui/material";
 import type { Metadata } from "next";

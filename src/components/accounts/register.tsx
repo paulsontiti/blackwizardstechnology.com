@@ -7,7 +7,6 @@ import {
   Container,
   AlertColor,
   CardActions,
-  Button,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { BlackAutocomplete } from "../form/BlackAutocomplete";
@@ -23,6 +22,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateUser } from "@/store/slices/userSlice";
 import Link from "next/link";
+import HomeAppBar from "../home/AppBar";
+import Footer from "../home/Footer";
 
 export default function RegisterComponent() {
   const dispatch = useDispatch<AppDispatch>();
@@ -104,104 +105,110 @@ export default function RegisterComponent() {
   };
 
   return (
-    <Container
-      sx={{
-        mt: 10,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Card
+    <>
+      <HomeAppBar />
+      <Container
         sx={{
-          maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-          minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-          p: 1,
+          mt: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mb: 5,
         }}
       >
-        <Typography variant="h6" fontSize={32}>
-          Join our community
-        </Typography>
+        <Card
+          sx={{
+            maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+            minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+            p: 1,
+          }}
+        >
+          <Typography variant="h6" fontSize={32}>
+            Join our community
+          </Typography>
 
-        <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
-        <BlackInputTextField
-          label="Username"
-          helperText="What would you want the Black Wizards community to call you?"
-          errorMessage={userNameErrorMessage}
-          onChange={(value: string) => {
-            setUserName(value);
-          }}
-          onBlur={() => {
-            setIsUserNameTouched(true);
-            register.clearError();
-            register.validateUserName(userName);
-            setUserNameErrorMessage(
-              register.errors.find((err) => err.fieldName === "userName")
-                ?.errorMessage as string
-            );
-          }}
-        />
-        <BlackPasswordField
-          label="Password"
-          helperText="Please enter a password of at least 8 characters which contains a capital letter,a digit and alphanumeric character"
-          errorMessage={passwordErrorMessage}
-          onChange={(value: string) => {
-            setPassword(value);
-          }}
-          onBlur={() => {
-            setIsPasswordTouched(true);
-            register.clearError();
-            register.validatePassword(password);
-            setPasswordErrorMessage(
-              register.errors.find((err) => err.fieldName === "password")
-                ?.errorMessage as string
-            );
-          }}
-        />
-        <BlackPasswordField
-          label="Confirm Password"
-          helperText="Ensure this matches with your password"
-          errorMessage={confirmPasswordErrorMessage}
-          onChange={(value: string) => {
-            setConfirmPassword(value);
-          }}
-          onBlur={() => {
-            setIsConfirmPasswordTouched(true);
-            register.clearError();
-            register.doesPasswordsMatch(confirmPassword, password);
-            setConfirmPasswordErrorMessage(
-              register.errors.find((err) => err.fieldName === "confirmPassword")
-                ?.errorMessage as string
-            );
-          }}
-        />
-        <BlackAutocomplete
-          options={register.referralOptions}
-          label="Type to search for usernames and social media handles"
-          placeholder=""
-          helperText="How did you know about us?"
-          onChange={(value: Option | null) => {
-            if (value) {
-              setReferralCode(value.label);
-            } else {
-              setReferralCode("");
-            }
-          }}
-        />
-        <CardActions>
-          <LoadingButton
-            loading={loading}
-            loadingIndicator={<CircularProgress color="success" />}
-            variant="contained"
-            onClick={registerHandler}
-          >
-            Register
-          </LoadingButton>
-        </CardActions>
-        <Typography mt={2}>
-          <Link href={"/login"}>Login</Link> if you already have an account
-        </Typography>
-      </Card>
-    </Container>
+          <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
+          <BlackInputTextField
+            label="Username"
+            helperText="What would you want the Black Wizards community to call you?"
+            errorMessage={userNameErrorMessage}
+            onChange={(value: string) => {
+              setUserName(value);
+            }}
+            onBlur={() => {
+              setIsUserNameTouched(true);
+              register.clearError();
+              register.validateUserName(userName);
+              setUserNameErrorMessage(
+                register.errors.find((err) => err.fieldName === "userName")
+                  ?.errorMessage as string
+              );
+            }}
+          />
+          <BlackPasswordField
+            label="Password"
+            helperText="Please enter a password of at least 8 characters which contains a capital letter,a digit and alphanumeric character"
+            errorMessage={passwordErrorMessage}
+            onChange={(value: string) => {
+              setPassword(value);
+            }}
+            onBlur={() => {
+              setIsPasswordTouched(true);
+              register.clearError();
+              register.validatePassword(password);
+              setPasswordErrorMessage(
+                register.errors.find((err) => err.fieldName === "password")
+                  ?.errorMessage as string
+              );
+            }}
+          />
+          <BlackPasswordField
+            label="Confirm Password"
+            helperText="Ensure this matches with your password"
+            errorMessage={confirmPasswordErrorMessage}
+            onChange={(value: string) => {
+              setConfirmPassword(value);
+            }}
+            onBlur={() => {
+              setIsConfirmPasswordTouched(true);
+              register.clearError();
+              register.doesPasswordsMatch(confirmPassword, password);
+              setConfirmPasswordErrorMessage(
+                register.errors.find(
+                  (err) => err.fieldName === "confirmPassword"
+                )?.errorMessage as string
+              );
+            }}
+          />
+          <BlackAutocomplete
+            options={register.referralOptions}
+            label="Type to search for usernames and social media handles"
+            placeholder=""
+            helperText="How did you know about us?"
+            onChange={(value: Option | null) => {
+              if (value) {
+                setReferralCode(value.label);
+              } else {
+                setReferralCode("");
+              }
+            }}
+          />
+          <CardActions>
+            <LoadingButton
+              loading={loading}
+              loadingIndicator={<CircularProgress color="success" />}
+              variant="contained"
+              onClick={registerHandler}
+            >
+              Register
+            </LoadingButton>
+          </CardActions>
+          <Typography mt={2}>
+            <Link href={"/login"}>Login</Link> if you already have an account
+          </Typography>
+        </Card>
+      </Container>{" "}
+      <Footer />
+    </>
   );
 }

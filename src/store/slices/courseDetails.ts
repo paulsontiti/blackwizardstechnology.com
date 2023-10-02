@@ -19,11 +19,15 @@ const courseDetailsSlice = createSlice({
       state.courseDetails = action.payload;
       localStorage.setItem('courseDetails',JSON.stringify(state.courseDetails))
     },
+    deleteCourseDetails: (state) => {
+      state.courseDetails = null;
+      localStorage.removeItem('courseDetails')
+    },
   },
   extraReducers: (builder) => {
   },
 });
 
-export const { updateCourseDetails } = courseDetailsSlice.actions;
+export const { updateCourseDetails ,deleteCourseDetails} = courseDetailsSlice.actions;
 
 export default courseDetailsSlice.reducer;

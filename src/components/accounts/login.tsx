@@ -7,14 +7,11 @@ import {
   Container,
   AlertColor,
   CardActions,
-  Button,
   CircularProgress,
 } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { BlackAutocomplete } from "../form/BlackAutocomplete";
 import BlackInputTextField from "../form/BlackInputTextField";
 import BlackPasswordField from "../form/BlackPasswordField";
-import { Option } from "@/lib/types/forms";
 import { ApiReturnValue } from "@/lib/types/returnValues";
 import { LoadingButton } from "@mui/lab";
 import { Login } from "@/lib/classes/login";
@@ -23,6 +20,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateUser } from "@/store/slices/userSlice";
 import Link from "next/link";
+import HomeAppBar from "../home/AppBar";
+import Footer from "../home/Footer";
 
 export default function LoginComponent() {
   //app dispatch
@@ -95,77 +94,83 @@ export default function LoginComponent() {
   };
 
   return (
-    <Container
-      sx={{
-        mt: 10,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Card
+    <>
+      <HomeAppBar />
+      <Container
         sx={{
-          maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-          minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-          p: 1,
+          mt: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mb: 5,
         }}
       >
-        <Typography variant="h6" fontSize={32}>
-          Signin
-        </Typography>
+        <Card
+          sx={{
+            maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+            minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+            p: 1,
+          }}
+        >
+          <Typography variant="h6" fontSize={32}>
+            Signin
+          </Typography>
 
-        <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
-        <BlackInputTextField
-          label="Username"
-          errorMessage={userNameErrorMessage}
-          onChange={(value: string) => {
-            setUserName(value);
-          }}
-          onBlur={() => {
-            setIsUserNameTouched(true);
-            login.clearError();
-            login.validateUserName(userName);
-            setUserNameErrorMessage(
-              login.errors.find((err) => err.fieldName === "userName")
-                ?.errorMessage as string
-            );
-          }}
-        />
-        <BlackPasswordField
-          label="Password"
-          errorMessage={passwordErrorMessage}
-          onChange={(value: string) => {
-            setPassword(value);
-          }}
-          onBlur={() => {
-            setIsPasswordTouched(true);
-            login.clearError();
-            login.validatePassword(password);
-            setPasswordErrorMessage(
-              login.errors.find((err) => err.fieldName === "password")
-                ?.errorMessage as string
-            );
-          }}
-        />
+          <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
+          <BlackInputTextField
+            label="Username"
+            errorMessage={userNameErrorMessage}
+            onChange={(value: string) => {
+              setUserName(value);
+            }}
+            onBlur={() => {
+              setIsUserNameTouched(true);
+              login.clearError();
+              login.validateUserName(userName);
+              setUserNameErrorMessage(
+                login.errors.find((err) => err.fieldName === "userName")
+                  ?.errorMessage as string
+              );
+            }}
+          />
+          <BlackPasswordField
+            label="Password"
+            errorMessage={passwordErrorMessage}
+            onChange={(value: string) => {
+              setPassword(value);
+            }}
+            onBlur={() => {
+              setIsPasswordTouched(true);
+              login.clearError();
+              login.validatePassword(password);
+              setPasswordErrorMessage(
+                login.errors.find((err) => err.fieldName === "password")
+                  ?.errorMessage as string
+              );
+            }}
+          />
 
-        <CardActions>
-          <LoadingButton
-            loading={loading}
-            loadingIndicator={<CircularProgress color="success" />}
-            variant="contained"
-            onClick={registerHandler}
-            fullWidth
-          >
-            Login
-          </LoadingButton>
-        </CardActions>
-        <Typography mt={2}>
-          <Link href={"/register"}>Register</Link> if you do not have an account
-        </Typography>
-        <Typography mt={2}>
-          <Link href={"/reset-password"}>forgot password?</Link>
-        </Typography>
-      </Card>
-    </Container>
+          <CardActions>
+            <LoadingButton
+              loading={loading}
+              loadingIndicator={<CircularProgress color="success" />}
+              variant="contained"
+              onClick={registerHandler}
+              fullWidth
+            >
+              Login
+            </LoadingButton>
+          </CardActions>
+          <Typography mt={2}>
+            <Link href={"/register"}>Register</Link> if you do not have an
+            account
+          </Typography>
+          <Typography mt={2}>
+            <Link href={"/reset-password"}>forgot password?</Link>
+          </Typography>
+        </Card>
+      </Container>
+      <Footer />
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { Box, Grid } from "@mui/material";
 import DashboardmenuDrawer from "@/components/drawers/DashboardMenuDrawer";
 import DashboardMenuList from "@/components/menu/DashboardMenuList";
 import NotificationBell from "@/components/notification/NotificationBell";
+import PageSecurity from "@/components/accounts/PageSecurity";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <>
+          <PageSecurity />
           <Grid container>
             <Grid item xs={2} md={4}>
               <DashboardmenuDrawer />

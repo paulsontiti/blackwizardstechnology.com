@@ -1,6 +1,5 @@
 "use client";
 import { Box, CardHeader, Typography, Skeleton, Avatar } from "@mui/material";
-import Dp from "../profile/Dp";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { BlackDescription } from "../styledComponents/BlackDescription";
@@ -15,26 +14,37 @@ import InfoAlert from "../alerts/InfoAlerts";
 import { CourseDetailsProgress } from "../course-details/CourseDetailsProgress";
 import { Profile } from "@/lib/classes/profile";
 import { updateProfile } from "@/store/slices/profileSlice";
+import { useRouter } from "next/navigation";
 
 export default function DashboardComponent() {
   const profile = useSelector((state: RootState) => state.profile.profile);
-  const { user } = useSelector((state: RootState) => state.users);
 
+  const user = useSelector((state: RootState) => state.users.user);
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
   const [studentProfile, setStudentprofile] = useState<any>(undefined);
+
+  //variables
+  const _id = user ? user._id : "";
+  const userName = user ? user.userName : "";
   useEffect(() => {
     if (!profile) {
       (async () => {
-        const response = await Profile.getProfile(user?._id as string);
-        if (response.ok) {
-          setStudentprofile(response.value);
-          dispatch(updateProfile(response.value));
+        if (_id) {
+          const response = await Profile.getProfile(_id);
+          if (response.ok) {
+            setStudentprofile(response.value);
+            dispatch(updateProfile(response.value));
+          }
+        } else {
+          router.push("/login");
         }
       })();
     } else {
       setStudentprofile(profile);
     }
-  }, [profile, user, dispatch]);
+  }, [profile, _id, dispatch, router]);
+  //console.log(studentProfile);
 
   if (studentProfile === undefined) return <InfoAlert message="loading..." />;
   if (studentProfile === null)
@@ -82,8 +92,8 @@ export default function DashboardComponent() {
         }
         subheader={
           <LoadingText
-            text={user?.userName as string}
-            component={<Typography>{`@${user && user?.userName}`}</Typography>}
+            text={userName}
+            component={<Typography>{`@${userName}`}</Typography>}
             width={100}
             height={20}
           />

@@ -20,8 +20,8 @@ export default function ProfilePage() {
   useEffect(() => {
     (async () => {
       if (user && !profile) {
-        const pro = new Profile();
-        const res: ApiReturnValue = await pro.getFetchData(user._id);
+        const res: ApiReturnValue = await Profile.getProfile(user._id);
+        console.log(res);
         if (res.ok) {
           dispatch(updateProfile(res.value));
 

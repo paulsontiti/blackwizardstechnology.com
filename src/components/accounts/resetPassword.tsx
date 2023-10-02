@@ -20,6 +20,8 @@ import { AccountError } from "@/lib/types/account";
 import { BlackFormikTextField } from "../form/BlackFormikTextField";
 import { BlackFormikPasswordField } from "../form/BlackFormikPasswordField";
 import { Account } from "@/lib/classes/account";
+import HomeAppBar from "../home/AppBar";
+import Footer from "../home/Footer";
 
 export default function ResetPasswordForm() {
   const router = useRouter();
@@ -91,61 +93,65 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <Card sx={{ mt: 10 }}>
-      <CardHeader
-        title="Reset Password"
-        sx={{ color: "red", fontWeight: "bold" }}
-      />
-      <CardContent>
-        <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={initialValues}
-          onSubmit={formikSubmitHandler}
-          enableReinitialize
-        >
-          {({ isSubmitting, isValid, isValidating }) => (
-            <Form>
-              <Box display={"flex"} flexDirection={"column"}>
-                <BlackFormikTextField
-                  name="userName"
-                  label="User Name"
-                  required={true}
-                  placeholder="e.g John"
-                />
-                <BlackFormikPasswordField
-                  name="password"
-                  label="Password"
-                  required={true}
-                  placeholder=""
-                />
-                <BlackFormikPasswordField
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  required={true}
-                  placeholder=""
-                />
-              </Box>
-              <CardActions>
-                <LoadingButton
-                  loading={loading || isSubmitting}
-                  disabled={!isValid || isSubmitting || isValidating}
-                  type="submit"
-                  loadingIndicator={<CircularProgress color="success" />}
-                  variant="contained"
-                  fullWidth
-                  onClick={() => {}}
-                >
-                  Reset password
-                </LoadingButton>
-              </CardActions>
+    <>
+      <HomeAppBar />
+      <Card sx={{ mt: 10, mb: 5 }}>
+        <CardHeader
+          title="Reset Password"
+          sx={{ color: "red", fontWeight: "bold" }}
+        />
+        <CardContent>
+          <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
+          <Formik
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            onSubmit={formikSubmitHandler}
+            enableReinitialize
+          >
+            {({ isSubmitting, isValid, isValidating }) => (
+              <Form>
+                <Box display={"flex"} flexDirection={"column"}>
+                  <BlackFormikTextField
+                    name="userName"
+                    label="User Name"
+                    required={true}
+                    placeholder="e.g John"
+                  />
+                  <BlackFormikPasswordField
+                    name="password"
+                    label="Password"
+                    required={true}
+                    placeholder=""
+                  />
+                  <BlackFormikPasswordField
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    required={true}
+                    placeholder=""
+                  />
+                </Box>
+                <CardActions>
+                  <LoadingButton
+                    loading={loading || isSubmitting}
+                    disabled={!isValid || isSubmitting || isValidating}
+                    type="submit"
+                    loadingIndicator={<CircularProgress color="success" />}
+                    variant="contained"
+                    fullWidth
+                    onClick={() => {}}
+                  >
+                    Reset password
+                  </LoadingButton>
+                </CardActions>
 
-              {/* <pre>{JSON.stringify(values, null, 4)}</pre>
+                {/* <pre>{JSON.stringify(values, null, 4)}</pre>
               <pre>{JSON.stringify(errors, null, 4)}</pre> */}
-            </Form>
-          )}
-        </Formik>
-      </CardContent>
-    </Card>
+              </Form>
+            )}
+          </Formik>
+        </CardContent>
+      </Card>{" "}
+      <Footer />
+    </>
   );
 }
