@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import { useRouter } from "next/navigation";
 import {
+  Avatar,
   Button,
   Drawer,
   Grid,
@@ -25,6 +26,7 @@ import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { logout } from "@/store/slices/userSlice";
+import { DashboardListItemButton } from "../menu/DashboardMenuList";
 
 const pages = [
   { name: "Home", url: "/" },
@@ -114,6 +116,7 @@ function HomeAppBar() {
                   />
                 </ListItemButton>
                 <BlackDivider />
+                <DashboardListItemButton />
                 <ListItemButton
                   sx={{ ml: 0 }}
                   onClick={() => {
@@ -244,7 +247,17 @@ function HomeAppBar() {
             ))}
           </Box>
           {_id ? (
-            <Logout />
+            <>
+              <IconButton
+                onClick={() => {
+                  router.push("/dashboard");
+                }}
+              >
+                <Avatar />
+              </IconButton>
+
+              <Logout />
+            </>
           ) : (
             <>
               {" "}

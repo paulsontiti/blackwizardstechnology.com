@@ -45,18 +45,7 @@ export default function DashboardMenuList() {
       </MenuItem>{" "}
       <BlackDivider />{" "}
       <MenuItem>
-        <ListItemButton
-          onClick={() => {
-            router.push("/dashboard");
-          }}
-        >
-          <ListItemIcon>
-            <DashboardIcon color="secondary" />
-          </ListItemIcon>
-          <ListItemText>
-            <Typography>Dashboard</Typography>
-          </ListItemText>
-        </ListItemButton>
+        <DashboardListItemButton />
       </MenuItem>{" "}
       <BlackDivider />{" "}
       <MenuItem>
@@ -146,4 +135,22 @@ export default function DashboardMenuList() {
 
 export function BlackDivider() {
   return <Divider color={theme.bwt[500]} sx={{ mt: 2, mb: 2 }} />;
+}
+
+export function DashboardListItemButton() {
+  const router = useRouter();
+  return (
+    <ListItemButton
+      onClick={() => {
+        router.push("/dashboard");
+      }}
+    >
+      <ListItemIcon>
+        <DashboardIcon color="secondary" />
+      </ListItemIcon>
+      <ListItemText>
+        <Typography>Dashboard</Typography>
+      </ListItemText>
+    </ListItemButton>
+  );
 }
