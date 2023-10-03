@@ -62,20 +62,22 @@ export default function CourseVideo({
   const courseDetails = useSelector(
     (state: RootState) => state.courseDetails.courseDetails
   );
-  let canTakeThisLesson = false;
+  let canTakeThisLesson = true;
 
   if (courseDetails) {
     if (episodeNumber === 1) {
       canTakeThisLesson = true;
     } else {
-      const prevEpisode = courseDetails.coursesTaken
-        .find((course) => course.courseId === courseId)
-        ?.episodes.find((ep) => ep.episodeNumber === episodeNumber - 1);
+      const prevEpisodeScore =
+        courseDetails.coursesTaken
+          .find((course) => course.courseId === courseId)
+          ?.episodes.find((ep) => ep.episodeNumber === episodeNumber - 1)
+          ?.score ?? 0;
 
-      if (prevEpisode) {
-        canTakeThisLesson = true;
-      } else {
+      if (prevEpisodeScore === 0) {
         canTakeThisLesson = false;
+      } else {
+        canTakeThisLesson = true;
       }
     }
   }
