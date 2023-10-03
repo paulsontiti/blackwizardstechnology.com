@@ -88,7 +88,7 @@ export default function DashboardComponent() {
           title="Is this African teenager a future coding superstar_ - BBC News"
         />
 
-        <CourseDetailsProgress />
+        {/* <CourseDetailsProgress /> */}
       </Box>
     );
   return (
@@ -146,7 +146,7 @@ export default function DashboardComponent() {
         title="Is this African teenager a future coding superstar_ - BBC News"
       />
 
-      <CourseDetailsProgress />
+      {/* <CourseDetailsProgress /> */}
     </Box>
   );
 }
