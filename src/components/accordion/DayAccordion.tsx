@@ -81,7 +81,7 @@ export default function DayAccordion({
               duration={`${episode.duration} mins`}
               downloadablePdf={episode.downloadablePdf}
               quickTest={episode.quickTest}
-              assignment="What is abstraction"
+              assignment={episode.assignment}
               courseId={courseId}
             />
           ))}
