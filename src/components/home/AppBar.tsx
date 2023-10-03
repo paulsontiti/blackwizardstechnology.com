@@ -30,6 +30,7 @@ import { DashboardListItemButton } from "../menu/DashboardMenuList";
 
 const pages = [
   { name: "Home", url: "/" },
+  { name: "Dashboard", url: "/dashboard" },
   { name: "About Us", url: "/about-us" },
   { name: "Contact Us", url: "/#contact-us" },
   // { name: "Courses", url: "/courses" },
