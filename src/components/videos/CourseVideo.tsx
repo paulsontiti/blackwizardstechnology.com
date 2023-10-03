@@ -57,6 +57,28 @@ export default function CourseVideo({
       localStorage.removeItem("episodeAttempts");
     }
   }, [_id]);
+
+  //get course details
+  const courseDetails = useSelector(
+    (state: RootState) => state.courseDetails.courseDetails
+  );
+  let canTakeThisLesson = false;
+
+  if (courseDetails) {
+    if (episodeNumber === 1) {
+      canTakeThisLesson = true;
+    } else {
+      const prevEpisode = courseDetails.coursesTaken
+        .find((course) => course.courseId === courseId)
+        ?.episodes.find((ep) => ep.episodeNumber === episodeNumber - 1);
+
+      if (prevEpisode) {
+        canTakeThisLesson = true;
+      } else {
+        canTakeThisLesson = false;
+      }
+    }
+  }
   if (user && !user.active)
     return (
       <Box minWidth={"100%"} maxWidth={"100%"}>
@@ -77,50 +99,61 @@ export default function CourseVideo({
       </Box>
     );
   return (
-    <Box mb={5} maxWidth={"100%"}>
-      <Typography mb={2} fontWeight={"bold"}>
-        {`Lesson ${episodeNumber} - ${title} `}
-      </Typography>
-      <Typography mb={2} fontWeight={"bold"}>
-        Duration: - {duration}
-      </Typography>
-      <VideoComponent src={videoSrc as string} />
-      <Typography m={2}>Downloadable Materials</Typography>
-      <Button
-        sx={{ color: "blue" }}
-        onClick={() => {
-          downloadFile(`/episodePdf/${courseId}/Lesson-${episodeNumber}.pdf`);
-        }}
-      >
-        {downloadablePdf}
-      </Button>
-      <QuickTest
-        quickTest={quickTest}
-        episodeNumber={episodeNumber}
-        courseId={courseId as string}
-      />{" "}
-      <AskQuestion
-        episodeNumber={episodeNumber}
-        courseId={courseId as string}
-      />{" "}
-      <Assignment
-        assignment={assignment}
-        assignmentLink={assignmentLink}
-        courseId={courseId as string}
-        episodeNumber={episodeNumber}
-      />
-      <Feedback courseId={courseId as string} episodeNumber={episodeNumber} />
-      <PersonalQuestionsAndAnswers
-        episodeNumber={episodeNumber}
-        courseId={courseId as string}
-      />{" "}
-      <EpisodeprogressComponent
-        courseId={courseId as string}
-        episodeNumber={episodeNumber}
-      />
-      <BlackDivider />
-      {/* <FAQ courseId={courseId as string} episodeNumber={episodeNumber} /> */}
-    </Box>
+    <>
+      {!canTakeThisLesson ? (
+        <InfoAlert message="You can not view the next lesson until you complete the previous lesson" />
+      ) : (
+        <Box mb={5} maxWidth={"100%"}>
+          <Typography mb={2} fontWeight={"bold"}>
+            {`Lesson ${episodeNumber} - ${title} `}
+          </Typography>
+          <Typography mb={2} fontWeight={"bold"}>
+            Duration: - {duration}
+          </Typography>
+          <VideoComponent src={videoSrc as string} />
+          <Typography m={2}>Downloadable Materials</Typography>
+          <Button
+            sx={{ color: "blue" }}
+            onClick={() => {
+              downloadFile(
+                `/episodePdf/${courseId}/Lesson-${episodeNumber}.pdf`
+              );
+            }}
+          >
+            {downloadablePdf}
+          </Button>
+          <QuickTest
+            quickTest={quickTest}
+            episodeNumber={episodeNumber}
+            courseId={courseId as string}
+          />{" "}
+          <AskQuestion
+            episodeNumber={episodeNumber}
+            courseId={courseId as string}
+          />{" "}
+          <Assignment
+            assignment={assignment}
+            assignmentLink={assignmentLink}
+            courseId={courseId as string}
+            episodeNumber={episodeNumber}
+          />
+          <Feedback
+            courseId={courseId as string}
+            episodeNumber={episodeNumber}
+          />
+          <PersonalQuestionsAndAnswers
+            episodeNumber={episodeNumber}
+            courseId={courseId as string}
+          />{" "}
+          <EpisodeprogressComponent
+            courseId={courseId as string}
+            episodeNumber={episodeNumber}
+          />
+          <BlackDivider />
+          {/* <FAQ courseId={courseId as string} episodeNumber={episodeNumber} /> */}
+        </Box>
+      )}
+    </>
   );
 }
 
