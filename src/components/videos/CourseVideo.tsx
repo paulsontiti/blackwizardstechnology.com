@@ -11,7 +11,7 @@ import AssignmentQuestionOptions from "../radioButtonGroup/AssignmentQuestionOpt
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
-import { AttemptType, UserType } from "@/lib/types/user";
+import { AttemptType } from "@/lib/types/user";
 import { updateCourseDetails } from "@/store/slices/courseDetails";
 import {
   StudentCourseDetailsT,
@@ -35,6 +35,7 @@ import VideoComponent from "./VideoComponent";
 import { attemptsJSON } from "@/lib/functions/user";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import Link from "next/link";
 
 //get attempts for this episode
 const attempts: AttemptType = attemptsJSON() as AttemptType;
@@ -46,6 +47,7 @@ export default function CourseVideo({
   quickTest,
   episodeNumber,
   courseId,
+  assignmentLink,
   videoSrc,
 }: CourseEpisodeType) {
   const user = useSelector((state: RootState) => state.users.user);
@@ -103,6 +105,7 @@ export default function CourseVideo({
       />{" "}
       <Assignment
         assignment={assignment}
+        assignmentLink={assignmentLink}
         courseId={courseId as string}
         episodeNumber={episodeNumber}
       />
@@ -373,8 +376,10 @@ function Assignment({
   assignment,
   courseId,
   episodeNumber,
+  assignmentLink,
 }: {
   assignment: string;
+  assignmentLink: string;
   courseId: string;
   episodeNumber: number;
 }) {
@@ -420,6 +425,7 @@ function Assignment({
       <BlackDivider />
       <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
       <BlackDescription label="Assignment" description={assignment} />
+      <Link href={assignmentLink ?? ""}>Assignment Material</Link>
       {assignmentAns.answer ? (
         <>
           {assignmentAns.answer && (

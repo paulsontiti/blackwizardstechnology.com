@@ -113,6 +113,7 @@ export default function DashboardmenuDrawer() {
             <BlackDivider />
             <MenuItem>
               <ListItemButton
+                disabled
                 onClick={() => {
                   setOpen(false);
 
@@ -128,6 +129,7 @@ export default function DashboardmenuDrawer() {
             <BlackDivider />
             <MenuItem>
               <ListItemButton
+                disabled
                 onClick={() => {
                   setOpen(false);
 
@@ -143,6 +145,7 @@ export default function DashboardmenuDrawer() {
             <BlackDivider />
             <MenuItem>
               <ListItemButton
+                disabled
                 onClick={() => {
                   setOpen(false);
 
@@ -158,6 +161,7 @@ export default function DashboardmenuDrawer() {
             <BlackDivider />
             <MenuItem>
               <ListItemButton
+                disabled
                 onClick={() => {
                   setOpen(false);
 

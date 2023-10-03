@@ -72,6 +72,7 @@ export default function DayAccordion({
         <AccordionDetails>
           {videosForToday.map((episode) => (
             <CourseVideo
+              assignmentLink={episode.assignmentLink}
               episodeNumber={episode.episodeNumber}
               key={episode.title}
               courseTitle={episode.courseTitle}

@@ -6,6 +6,7 @@ export type CourseEpisodeType={
     duration:string,
 quickTest:QuickTest
 assignment:string
+assignmentLink:string
 downloadablePdf:string
 videoSrc?:string
 }

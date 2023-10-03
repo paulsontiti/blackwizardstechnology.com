@@ -29,6 +29,7 @@ const courseEpisodeSchema = new Schema(
       required: true,
       trim: true,
     },
+    
     studentsPersonalQuestions: [
       { studentId: {
         type: Schema.Types.ObjectId,
@@ -53,6 +54,11 @@ const courseEpisodeSchema = new Schema(
       }
     }],
     assignment: {
+      type: String,
+      required:true,
+      trim: true,
+    },
+    assignmentLink:{
       type: String,
       required:true,
       trim: true,

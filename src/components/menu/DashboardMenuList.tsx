@@ -76,6 +76,7 @@ export default function DashboardMenuList() {
       <BlackDivider />
       <MenuItem>
         <ListItemButton
+          disabled
           onClick={() => {
             router.push("/dashboard/recommended-courses");
           }}
@@ -89,6 +90,7 @@ export default function DashboardMenuList() {
       <BlackDivider />
       <MenuItem>
         <ListItemButton
+          disabled
           onClick={() => {
             router.push("/dashboard/referral");
           }}
@@ -102,6 +104,7 @@ export default function DashboardMenuList() {
       <BlackDivider />
       <MenuItem>
         <ListItemButton
+          disabled
           onClick={() => {
             router.push("/dashboard/wallet");
           }}
@@ -115,6 +118,7 @@ export default function DashboardMenuList() {
       <BlackDivider />
       <MenuItem>
         <ListItemButton
+          disabled
           onClick={() => {
             router.push("/community");
           }}

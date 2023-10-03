@@ -43,9 +43,9 @@ if(isBodyValid(body)){
    return new NextResponse(JSON.stringify(returnValue),{status:201})
  
 }else{
-    const {title,courseTitle,duration,assignment,downloadablePdf,episodeNumber,quickTest,courseId} = body
+    const {title,courseTitle,duration,assignment,downloadablePdf,episodeNumber,quickTest,courseId,assignmentLink} = body
     const courseEpisode = await CourseEpisodeModel.create({
-        title,courseTitle,duration,assignment,downloadablePdf,episodeNumber,quickTest,courseId
+        title,courseTitle,duration,assignment,downloadablePdf,episodeNumber,quickTest,courseId,assignmentLink
     })
     
      if(!courseEpisode){
@@ -70,5 +70,5 @@ if(isBodyValid(body)){
 function isBodyValid(body:CourseEpisodeType){
     
 return !body.title || !body.courseTitle || !body.duration || !body.assignment
- || !body.downloadablePdf
+ || !body.downloadablePdf || !body.assignmentLink
 }
