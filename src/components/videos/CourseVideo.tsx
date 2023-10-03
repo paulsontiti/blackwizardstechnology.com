@@ -62,12 +62,15 @@ export default function CourseVideo({
   const courseDetails = useSelector(
     (state: RootState) => state.courseDetails.courseDetails
   );
+
+  //check the student is elligible to take the next cass
   let canTakeThisLesson = true;
 
   if (courseDetails) {
     if (episodeNumber === 1) {
       canTakeThisLesson = true;
     } else {
+      //check if the previous episode has a score
       const prevEpisodeScore =
         courseDetails.coursesTaken
           .find((course) => course.courseId === courseId)
@@ -672,7 +675,7 @@ function QuickTest({
         <>
           <Box bgcolor={"whitesmoke"}>
             <InfoAlert
-              message={`You only have ${quickTest.repeatableTimes} attempts for this test. 
+              message={`Ensure you do your assignment because 40% of the quiz questions comes from the assignment material.You only have ${quickTest.repeatableTimes} attempts for this test. 
       Ensure you go through the lesson video and material thoroughly. If you fail this test ${quickTest.repeatableTimes} times, you will be out of this course`}
             />
             <Box display={"flex"} id="quickTest">
