@@ -152,7 +152,7 @@ function HomeAppBar() {
                   />
                 </ListItemButton>
                 <BlackDivider />
-                <ListItemButton
+                {/* <ListItemButton
                   sx={{ ml: 0 }}
                   onClick={() => {
                     setOpenDrawer(false);
@@ -166,7 +166,7 @@ function HomeAppBar() {
                     primary={<Typography variant="body1">Courses</Typography>}
                   />
                 </ListItemButton>
-                <BlackDivider />
+                <BlackDivider /> */}
                 <ListItemButton
                   sx={{ ml: 0 }}
                   onClick={() => {
