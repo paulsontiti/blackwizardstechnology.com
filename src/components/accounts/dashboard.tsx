@@ -74,7 +74,7 @@ export default function DashboardComponent() {
         </Button>
         <Button
           sx={{ ml: 2 }}
-          variant="outlined"
+          variant="contained"
           onClick={() => {
             router.push("/dashboard/course-details");
           }}
@@ -141,7 +141,7 @@ export default function DashboardComponent() {
       />
       <Button
         sx={{ mt: 2 }}
-        variant="outlined"
+        variant="contained"
         onClick={() => {
           router.push("/dashboard/course-details");
         }}
