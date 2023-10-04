@@ -72,6 +72,15 @@ export default function DashboardComponent() {
         >
           Add Profile
         </Button>
+        <Button
+          sx={{ mt: 2 }}
+          variant="outlined"
+          onClick={() => {
+            router.push("/dashboard/course-details");
+          }}
+        >
+          Go to classroom
+        </Button>
 
         <VideoComponent
           src="/assets/11-year-old.mp4"
@@ -130,6 +139,15 @@ export default function DashboardComponent() {
           />
         }
       />
+      <Button
+        sx={{ mt: 2 }}
+        variant="outlined"
+        onClick={() => {
+          router.push("/dashboard/course-details");
+        }}
+      >
+        Go to classroom
+      </Button>
 
       <VideoComponent
         src="/assets/11-year-old.mp4"

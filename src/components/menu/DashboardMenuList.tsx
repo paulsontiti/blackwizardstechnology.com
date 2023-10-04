@@ -70,7 +70,7 @@ export default function DashboardMenuList() {
           <ListItemIcon>
             <InfoIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText>Course Details</ListItemText>
+          <ListItemText>Classroom</ListItemText>
         </ListItemButton>
       </MenuItem>{" "}
       <BlackDivider />

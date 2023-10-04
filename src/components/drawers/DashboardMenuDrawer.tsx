@@ -78,7 +78,20 @@ export default function DashboardmenuDrawer() {
             </MenuItem>{" "}
             <BlackDivider />{" "}
             <MenuItem>
-              <DashboardListItemButton />
+              <ListItemButton
+                onClick={() => {
+                  setOpen(false);
+                  router.push("/dashboard");
+                }}
+              >
+                <ListItemIcon>
+                  <DashboardIcon color="secondary" />
+                </ListItemIcon>
+                <ListItemText>
+                  <Typography>Dashboard</Typography>
+                </ListItemText>
+              </ListItemButton>
+              <BlackDivider />
             </MenuItem>{" "}
             <BlackDivider />{" "}
             <MenuItem>
@@ -107,7 +120,7 @@ export default function DashboardmenuDrawer() {
                 <ListItemIcon>
                   <InfoIcon color="secondary" />
                 </ListItemIcon>
-                <ListItemText>Course Details</ListItemText>
+                <ListItemText>Classroom</ListItemText>
               </ListItemButton>
             </MenuItem>{" "}
             <BlackDivider />
