@@ -68,7 +68,7 @@ export default function DashboardMenuList() {
           }}
         >
           <ListItemIcon>
-            <InfoIcon color="secondary" />
+            <SchoolIcon color="secondary" />
           </ListItemIcon>
           <ListItemText>Classroom</ListItemText>
         </ListItemButton>

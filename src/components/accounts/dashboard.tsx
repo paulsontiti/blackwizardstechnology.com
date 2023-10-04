@@ -73,7 +73,7 @@ export default function DashboardComponent() {
           Add Profile
         </Button>
         <Button
-          sx={{ mt: 2 }}
+          sx={{ ml: 2 }}
           variant="outlined"
           onClick={() => {
             router.push("/dashboard/course-details");
