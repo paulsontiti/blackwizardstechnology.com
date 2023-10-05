@@ -50,24 +50,7 @@ export default function DayAccordion({
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>{`Day ${dayNumber}`}</Typography>
-          {videosForToday.length > 0 && (
-            <Box
-              display={"flex"}
-              minWidth={{ xs: "80%", md: "92%" }}
-              maxWidth={{ xs: "80%", md: "92%" }}
-              alignItems={"center"}
-              justifyContent={"flex-end"}
-            >
-              <Typography>{`${doneEpisodesCount}/${videosForToday.length}`}</Typography>
-              {videosForToday.length > 0 &&
-              doneEpisodesCount === videosForToday.length ? (
-                <VerifiedIcon color="success" />
-              ) : (
-                <PendingIcon color="error" />
-              )}
-            </Box>
-          )}
+          <Typography>{`Class ${dayNumber}`}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {videosForToday.map((episode) => (

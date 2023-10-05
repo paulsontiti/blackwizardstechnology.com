@@ -113,9 +113,9 @@ export default function CoursesTab() {
           ))}
         </Tabs>
       </Box>
-      <HoursSpentDailyRadioButtonsGroup
+      {/* <HoursSpentDailyRadioButtonsGroup
         handleTimeChoice={handleChangeNumHours}
-      />
+      /> */}
       {coursesArray.map((course, i) => (
         <CustomTabPanel key={course.name} value={value} index={i}>
           {/* iterate all the weeks for the course */}
