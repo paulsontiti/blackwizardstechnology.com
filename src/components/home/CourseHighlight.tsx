@@ -50,7 +50,7 @@ export default function CourseHighlight() {
         />
         <BottomNavigationAction
           sx={{ minWidth: 150, mb: 5 }}
-          label="8-10 Hours
+          label="5 Hours
 Commitment per Week"
           icon={
             <Box mb={2}>
