@@ -19,10 +19,7 @@ const studentCourseDetailsdeModelSchema = new Schema(
                 {
                     episodeNumber:Number,
                     completed:Boolean,
-                    assignment:{
-                      answer:String,
-                      grade:{type:Number,default:0}
-                    },
+                   
                     score:Number
                 }
               ]

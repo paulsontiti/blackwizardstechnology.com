@@ -9,6 +9,7 @@ export default function error({
   error: Error;
   reset: () => void;
 }) {
+  console.log(error.stack);
   return (
     <Box>
       <Typography>An Error occurred: {error.message}</Typography>

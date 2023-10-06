@@ -15,7 +15,7 @@ export function BlackAutocompleteFreeSolo({
       id="free-solo-2-demo"
       disableClearable
       value={value}
-      options={options.map((option) => option.question)}
+      options={options && options.map((option) => option.question)}
       onChange={(event: any, newValue: string | null) => {
         onChange(newValue);
       }}

@@ -29,7 +29,7 @@ export default function DayAccordion({
   const completedEpisodeNumbers: number[] = [];
   courseDetails?.coursesTaken.map((details) => {
     details.episodes.map((ep) => {
-      if (ep.score && ep.assignment.answer) {
+      if (ep.score) {
         completedEpisodeNumbers.push(ep.episodeNumber);
       }
     });

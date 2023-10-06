@@ -820,6 +820,7 @@ function Result({
             });
 
             dispatch(updateCourseDetails(response.value));
+            localStorage.removeItem("episodeAttempts");
           }
         } else {
           const studentCourseDetails = new StudentCourseDetails();
