@@ -878,8 +878,8 @@ function Result({
         </Box>
       ) : (
         <Typography>
-          Congratulations!!! You have a step to becoming a Sotfware Engineering
-          Wizard
+          Congratulations!!! You are a step closer to becoming a Sotfware
+          Engineer
         </Typography>
       )}
     </Box>
