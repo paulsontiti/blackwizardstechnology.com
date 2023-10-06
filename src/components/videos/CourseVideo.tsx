@@ -64,12 +64,11 @@ export default function CourseVideo({
   );
 
   //check the student is elligible to take the next cass
-  let canTakeThisLesson = true;
-
-  if (courseDetails) {
-    if (episodeNumber === 1) {
-      canTakeThisLesson = true;
-    } else {
+  let canTakeThisLesson = false;
+  if (episodeNumber === 1) {
+    canTakeThisLesson = true;
+  } else {
+    if (courseDetails) {
       //check if the previous episode has a score
       const prevEpisodeScore =
         courseDetails.coursesTaken
@@ -84,6 +83,7 @@ export default function CourseVideo({
       }
     }
   }
+
   if (user && !user.active)
     return (
       <Box minWidth={"100%"} maxWidth={"100%"}>

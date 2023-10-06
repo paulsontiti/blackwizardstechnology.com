@@ -17,7 +17,7 @@ const studentCourseDetailsdeModelSchema = new Schema(
               },
               episodes:[
                 {
-                    episodeNumber:Number,
+                    episodeNumber:{type:Number,unique:true},
                     completed:Boolean,
                    
                     score:Number
