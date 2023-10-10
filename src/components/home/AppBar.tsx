@@ -34,6 +34,7 @@ const pages = [
   { name: "Dashboard", url: "/dashboard" },
   { name: "About Us", url: "/about-us" },
   { name: "Contact Us", url: "/#contact-us" },
+  { name: "Why a career in Software Engineering", url: "/why-a-career-in-se" },
   // { name: "Courses", url: "/courses" },
 ];
 const settings = ["Profile", "Account", "Logout"];
