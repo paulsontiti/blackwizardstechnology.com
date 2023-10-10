@@ -3,9 +3,9 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import PendingIcon from "@mui/icons-material/Pending";
-import { theme } from "@/app/layout";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { theme } from "../ThemeProvider";
 
 const EpisodeprogressComponent = ({
   courseId,

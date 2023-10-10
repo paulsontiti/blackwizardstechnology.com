@@ -1,7 +1,7 @@
 "use client";
-import { theme } from "@/app/layout";
 import { Box, Grid, Typography } from "@mui/material";
 import CourseDetailsAccordion from "../accordion/CourseDetailsAccordion";
+import { theme } from "../ThemeProvider";
 
 export function CourseDetailsProgress() {
   return (
