@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RegisterComponent from "@/components/accounts/register";
 
 export const metadata: Metadata = {
-  title: "Join our community",
+  title: "Register",
   description: "We are the best",
 };
 export default function Register() {

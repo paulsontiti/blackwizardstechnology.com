@@ -5,7 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
-import { theme } from "@/app/layout";
+import { theme } from "../ThemeProvider";
 
 export default function CareerCard() {
   const router = useRouter();

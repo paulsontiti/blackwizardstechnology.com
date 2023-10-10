@@ -15,12 +15,7 @@ export function LoadingText({
   if (!text) return <Skeleton animation="wave" width={width} height={height} />;
   return component;
 }
-export function LoadingTextRectangular({
-  text,
-  component,
-  width,
-  height,
-}: LoadingTextProps) {
+export function LoadingTextRectangular({ text, component }: LoadingTextProps) {
   if (!text)
     return (
       <Skeleton

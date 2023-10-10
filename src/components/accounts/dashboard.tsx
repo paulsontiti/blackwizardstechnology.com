@@ -1,12 +1,5 @@
 "use client";
-import {
-  Box,
-  CardHeader,
-  Typography,
-  Skeleton,
-  Avatar,
-  Button,
-} from "@mui/material";
+import { Box, CardHeader, Typography, Avatar, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { BlackDescription } from "../styledComponents/BlackDescription";
@@ -14,11 +7,9 @@ import {
   LoadingText,
   LoadingTextRectangular,
 } from "../styledComponents/LoadingText";
-import Link from "next/link";
 import VideoComponent from "../videos/VideoComponent";
 import { useEffect, useState } from "react";
 import InfoAlert from "../alerts/InfoAlerts";
-import { CourseDetailsProgress } from "../course-details/CourseDetailsProgress";
 import { Profile } from "@/lib/classes/profile";
 import { updateProfile } from "@/store/slices/profileSlice";
 import { useRouter } from "next/navigation";

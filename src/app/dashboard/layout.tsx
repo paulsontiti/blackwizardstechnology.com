@@ -1,17 +1,12 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Box, Grid } from "@mui/material";
 import DashboardmenuDrawer from "@/components/drawers/DashboardMenuDrawer";
 import DashboardMenuList from "@/components/menu/DashboardMenuList";
 import NotificationBell from "@/components/notification/NotificationBell";
 import PageSecurity from "@/components/accounts/PageSecurity";
+import BWTThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Welcome to Black Wizards Technolgy",
-  description: "We are the best",
-};
 
 export default function RootLayout({
   children,
@@ -21,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <>
+        <BWTThemeProvider>
           <PageSecurity />
           <Grid container>
             <Grid item xs={2} md={4}>
@@ -40,7 +35,7 @@ export default function RootLayout({
             </Box>
             {children}
           </Box>
-        </>
+        </BWTThemeProvider>
       </body>
     </html>
   );

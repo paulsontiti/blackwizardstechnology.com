@@ -94,83 +94,78 @@ export default function LoginComponent() {
   };
 
   return (
-    <>
-      <HomeAppBar />
-      <Container
+    <Container
+      sx={{
+        mt: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mb: 5,
+      }}
+    >
+      <Card
         sx={{
-          mt: 10,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mb: 5,
+          maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+          minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
+          p: 1,
         }}
       >
-        <Card
-          sx={{
-            maxWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-            minWidth: { xs: "100%", sm: "80%", md: "60%", lg: "50%" },
-            p: 1,
+        <Typography variant="h6" fontSize={32}>
+          Signin
+        </Typography>
+
+        <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
+        <BlackInputTextField
+          label="Username"
+          errorMessage={userNameErrorMessage}
+          onChange={(value: string) => {
+            setUserName(value);
           }}
-        >
-          <Typography variant="h6" fontSize={32}>
-            Signin
-          </Typography>
+          onBlur={() => {
+            setIsUserNameTouched(true);
+            login.clearError();
+            login.validateUserName(userName);
+            setUserNameErrorMessage(
+              login.errors.find((err) => err.fieldName === "userName")
+                ?.errorMessage as string
+            );
+          }}
+        />
+        <BlackPasswordField
+          label="Password"
+          errorMessage={passwordErrorMessage}
+          onChange={(value: string) => {
+            setPassword(value);
+          }}
+          onBlur={() => {
+            setIsPasswordTouched(true);
+            login.clearError();
+            login.validatePassword(password);
+            setPasswordErrorMessage(
+              login.errors.find((err) => err.fieldName === "password")
+                ?.errorMessage as string
+            );
+          }}
+        />
 
-          <SnackbarComponent msg={msg} color={color} ref={snackBarRef} />
-          <BlackInputTextField
-            label="Username"
-            errorMessage={userNameErrorMessage}
-            onChange={(value: string) => {
-              setUserName(value);
-            }}
-            onBlur={() => {
-              setIsUserNameTouched(true);
-              login.clearError();
-              login.validateUserName(userName);
-              setUserNameErrorMessage(
-                login.errors.find((err) => err.fieldName === "userName")
-                  ?.errorMessage as string
-              );
-            }}
-          />
-          <BlackPasswordField
-            label="Password"
-            errorMessage={passwordErrorMessage}
-            onChange={(value: string) => {
-              setPassword(value);
-            }}
-            onBlur={() => {
-              setIsPasswordTouched(true);
-              login.clearError();
-              login.validatePassword(password);
-              setPasswordErrorMessage(
-                login.errors.find((err) => err.fieldName === "password")
-                  ?.errorMessage as string
-              );
-            }}
-          />
-
-          <CardActions>
-            <LoadingButton
-              loading={loading}
-              loadingIndicator={<CircularProgress color="success" />}
-              variant="contained"
-              onClick={registerHandler}
-              fullWidth
-            >
-              Login
-            </LoadingButton>
-          </CardActions>
-          <Typography mt={2}>
-            <Link href={"/register"}>Register</Link> if you do not have an
-            account
-          </Typography>
-          <Typography mt={2}>
-            <Link href={"/reset-password"}>forgot password?</Link>
-          </Typography>
-        </Card>
-      </Container>
-      <Footer />
-    </>
+        <CardActions>
+          <LoadingButton
+            loading={loading}
+            loadingIndicator={<CircularProgress color="success" />}
+            variant="contained"
+            onClick={registerHandler}
+            fullWidth
+          >
+            Login
+          </LoadingButton>
+        </CardActions>
+        <Typography mt={2}>
+          <Link href={"/register"}>Register</Link> if you do not have an account
+        </Typography>
+        <Typography mt={2}>
+          <Link href={"/reset-password"}>forgot password?</Link>
+        </Typography>
+      </Card>
+    </Container>
   );
 }

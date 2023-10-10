@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Person2Icon from "@mui/icons-material/Person2";
-import InfoIcon from "@mui/icons-material/Info";
 import SchoolIcon from "@mui/icons-material/School";
 import Diversity1Icon from "@mui/icons-material/Diversity1";
 import WalletIcon from "@mui/icons-material/Wallet";
@@ -14,9 +13,9 @@ import ForumIcon from "@mui/icons-material/Forum";
 import { useRouter } from "next/navigation";
 import { ListItemButton, Typography } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { theme } from "@/app/layout";
 import { MenuListLogout } from "../drawers/DashboardMenuDrawer";
 import HomeIcon from "@mui/icons-material/Home";
+import { theme } from "../ThemeProvider";
 
 export default function DashboardMenuList() {
   const router = useRouter();

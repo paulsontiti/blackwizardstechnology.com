@@ -20,13 +20,14 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import Logo from "./Logo";
-import { BlackDivider } from "../drawers/DashboardMenuDrawer";
-import SchoolIcon from "@mui/icons-material/School";
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { logout } from "@/store/slices/userSlice";
-import { DashboardListItemButton } from "../menu/DashboardMenuList";
+import {
+  BlackDivider,
+  DashboardListItemButton,
+} from "../menu/DashboardMenuList";
 
 const pages = [
   { name: "Home", url: "/" },

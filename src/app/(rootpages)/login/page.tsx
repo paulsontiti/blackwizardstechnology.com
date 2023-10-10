@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import DashboardComponent from "@/components/accounts/dashboard";
+import LoginComponent from "@/components/accounts/login";
 
 export const metadata: Metadata = {
-  title: "Welcome to Black Wizards Technolgy",
+  title: "Login",
   description: "We are the best",
 };
 export default function Login() {
-  return <DashboardComponent />;
+  return <LoginComponent />;
 }

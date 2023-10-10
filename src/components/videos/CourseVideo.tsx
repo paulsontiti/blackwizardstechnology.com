@@ -23,19 +23,18 @@ import { BlackAutocompleteFreeSolo } from "../form/BlackAutocompleteFreeSolo";
 import { QuestionOption } from "@/lib/types/forms";
 import { CourseEpisode } from "@/lib/classes/courseEpisode";
 import { downloadFile } from "@/lib/functions/courseVideo";
-import { BlackDivider } from "../drawers/DashboardMenuDrawer";
 import InfoAlert from "../alerts/InfoAlerts";
 import { useRouter } from "next/navigation";
 import ErrorAlert from "../alerts/ErrorAlert";
 import { Account } from "@/lib/classes/account";
 import { updateUser } from "@/store/slices/userSlice";
 import SuccessAlert from "../alerts/SuccessAlert";
-import EpisodeprogressComponent from "../course-details/EpisodeprogressComponent";
 import VideoComponent from "./VideoComponent";
 import { attemptsJSON } from "@/lib/functions/user";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Link from "next/link";
+import { BlackDivider } from "../menu/DashboardMenuList";
 
 //get attempts for this episode
 const attempts: AttemptType = attemptsJSON() as AttemptType;

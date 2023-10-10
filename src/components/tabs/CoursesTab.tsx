@@ -66,7 +66,7 @@ export default function CoursesTab() {
       }
     })();
   }, []);
-  if (!courses) return <p>loading.....</p>;
+  if (!courses) return <p>loading course.....</p>;
   if (error) return <p>Error occurred</p>;
 
   //create course array from the data from database
@@ -119,7 +119,7 @@ export default function CoursesTab() {
       {coursesArray.map((course, i) => (
         <CustomTabPanel key={course.name} value={value} index={i}>
           {/* iterate all the weeks for the course */}
-          {loading && <p>loading.....</p>}
+          {loading && <p>loading weeky classes.....</p>}
           {course.noOfWeeksArrary.map((num) => (
             <WeekAccordion
               loading={handleLoading}
