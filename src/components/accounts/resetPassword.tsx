@@ -8,6 +8,7 @@ import {
   Card,
   CardContent,
   Typography,
+  Container,
 } from "@mui/material";
 import SnackbarComponent from "../snackbar/SnackBar";
 import React from "react";
@@ -93,8 +94,15 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <>
-      <HomeAppBar />
+    <Container
+      sx={{
+        mt: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mb: 5,
+      }}
+    >
       <Card sx={{ mt: 10, mb: 5 }}>
         <CardHeader
           title="Reset Password"
@@ -151,7 +159,6 @@ export default function ResetPasswordForm() {
           </Formik>
         </CardContent>
       </Card>{" "}
-      <Footer />
-    </>
+    </Container>
   );
 }
