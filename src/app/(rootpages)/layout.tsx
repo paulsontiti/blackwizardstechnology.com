@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import PageSecurity from "@/components/accounts/PageSecurity";
 import HomeAppBar from "@/components/home/AppBar";
 import Footer from "@/components/home/Footer";
 import BWTThemeProvider from "@/components/ThemeProvider";
@@ -16,7 +15,6 @@ export default function RootPagesLayout({
       <body className={inter.className}>
         <BWTThemeProvider>
           <HomeAppBar />
-          <PageSecurity />
 
           {children}
           <Footer />
